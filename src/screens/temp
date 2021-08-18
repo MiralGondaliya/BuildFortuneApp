@@ -1,0 +1,6 @@
+let languageId = await language();
+let countryId = await country();
+formData.append('language_id', languageId);
+formData.append('post_language_id', languageId);
+formData.append('country_id', countryId);
+formData.append('post_country_id', countryId);

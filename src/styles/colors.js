@@ -1,0 +1,18 @@
+export const COLORS = {
+  primary: '#262B71',
+  white: '#ffffff',
+  gray: '#727271',
+  gray_disable: '#C4C4C4',
+  gray_hint: 'rgba(0,0,0,0.5)',
+  gray_hint_light: '#c6c6c6',
+  gray_light: '#E6E6E6',
+  gray_lable: '#A1A1A1',
+  gray_athens: '#ffffff',
+  gray_border: '#f1f1f1',
+  black: '#000000',
+  cornFlowerBlue: '#8E97C7',
+  border: 'rgba(43, 45, 66, 0.2)',
+  red: '#C5161C',
+  transWeight: 'rgba(255,255,255,0.8)',
+  transBlack: 'rgba(0,0,0,0.7)',
+};

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "18986708892",
+    "project_id": "build-fortune",
+    "storage_bucket": "build-fortune.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:18986708892:android:688b603e6b9d9fac0d2259",
+        "android_client_info": {
+          "package_name": "com.buildfortune"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "18986708892-99c8ph3l11d55c0p6ueuvokb99hv9a22.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBkhUDLWQyHc8ryNxn8uDT8q8haeMURPGg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "18986708892-99c8ph3l11d55c0p6ueuvokb99hv9a22.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
