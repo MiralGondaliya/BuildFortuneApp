@@ -14,13 +14,15 @@ import GetStartedHeader from '../components/getStartedHeader';
 import I18n, {changeAppLanguage} from '../i18n/i18n';
 import SelectableButtons from '../components/selectableButtons';
 import Storage, {
+  GENERAL_DATA,
   INITIAL_SCREEN,
   IS_MANUAL_RESTART,
   LANGUAGE,
 } from '../const/storage';
-import {apiCall, getLanguageList, selectLanguage} from '../api';
+import {apiCall, getGeneralData, getLanguageList, selectLanguage} from '../api';
 import {showErrorMessage} from '../const/flashMessage';
-import RNRestart from 'react-native-restart'; // Import package from node modules
+import RNRestart from 'react-native-restart';
+import NavigationService from '../navigation/NavigationService'; // Import package from node modules
 
 const SelectLanguage = () => {
   const [countries, setCountries] = useState([]);
@@ -61,26 +63,68 @@ const SelectLanguage = () => {
     setLanguageListForOptions(languageBucket);
   };
 
-  const handleOnNextPress = async language => {
-    let selectedLanguage = languageList.find(lng => lng.lang_name === language);
-    apiCall(
-      selectLanguage(selectedLanguage.lang_id),
-      (data, message) => {
-        console.log(message);
-      },
-      false,
-    );
-    changeAppLanguage(selectedLanguage.lang_short_name);
-    await Storage.storeData(LANGUAGE, JSON.stringify(selectedLanguage));
-    await Storage.storeData(INITIAL_SCREEN, 'SelectNationality');
-
-    if (selectedLanguage.lang_short_name === 'ar') {
-      I18nManager.forceRTL(true);
-    } else {
-      I18nManager.forceRTL(false);
+  const getLanguage = async () => {
+    let mLanguage = await Storage.getData(LANGUAGE);
+    if (mLanguage) {
+      mLanguage = JSON.parse(mLanguage);
     }
-    await Storage.storeData(IS_MANUAL_RESTART, 'true');
-    RNRestart.Restart();
+    return mLanguage;
+  };
+
+  const handleOnNextPress = async language => {
+    let preSelectedLanguage = await getLanguage();
+    let selectedLanguage = languageList.find(lng => lng.lang_name === language);
+    if (
+      preSelectedLanguage?.lang_short_name !== selectedLanguage.lang_short_name
+    ) {
+      apiCall(
+        selectLanguage(selectedLanguage.lang_id),
+        (data, message) => {
+          console.log(message);
+        },
+        false,
+      );
+      changeAppLanguage(selectedLanguage.lang_short_name);
+
+      await Storage.storeData(LANGUAGE, JSON.stringify(selectedLanguage));
+      await Storage.storeData(INITIAL_SCREEN, 'SelectNationality');
+
+      apiCallGetGeneralData(async () => {
+        if (selectedLanguage.lang_short_name === 'ar') {
+          I18nManager.forceRTL(true);
+        } else {
+          I18nManager.forceRTL(false);
+        }
+        await Storage.storeData(IS_MANUAL_RESTART, 'true');
+        RNRestart.Restart();
+      });
+    } else {
+      let generalData = await Storage.getData(GENERAL_DATA);
+      if (generalData) {
+        NavigationService.reset('SelectNationality');
+      } else {
+        apiCallGetGeneralData(() => {
+          NavigationService.reset('SelectNationality');
+        });
+      }
+    }
+  };
+
+  const apiCallGetGeneralData = callback => {
+    apiCall(
+      getGeneralData(),
+      async (data, message) => {
+        if (data) {
+          await Storage.storeData(GENERAL_DATA, JSON.stringify(data));
+          setTimeout(() => {
+            callback();
+          }, 500);
+        } else {
+          showErrorMessage(message);
+        }
+      },
+      true,
+    );
   };
 
   return (

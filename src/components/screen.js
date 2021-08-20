@@ -27,6 +27,7 @@ const Screen = props => {
           <ScrollView
             decelerationRate="normal"
             overScrollMode={'never'}
+            keyboardShouldPersistTaps={true}
             showsVerticalScrollIndicator={false}
             style={ContainerStyles.container}
             contentContainerStyle={ContainerStyles.contentContainer}>

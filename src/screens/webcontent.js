@@ -16,7 +16,7 @@ import {FONTS} from '../styles/fonts';
 import WebView from 'react-native-webview';
 import I18n from '../i18n/i18n';
 import {getNavigationParams} from '../const/utils';
-import {apiCall, auth, getCmsPageDetails} from '../api';
+import {apiCall, auth, getCmsPageDetails, language} from '../api';
 import {showErrorMessage} from '../const/flashMessage';
 import BackButton from '../components/backButton';
 
@@ -50,8 +50,14 @@ const WebContent = ({route}) => {
               break;
             case I18n.t('contactUs'):
               auth().then(response => {
-                let token = response.token;
-                setUrl(`${cms_pages.contact}/${token}`);
+                language().then(languageId => {
+                  if (languageId) {
+                    let token = response.token;
+                    setUrl(
+                      `${cms_pages.contact}/${token}?language_id=${languageId}`,
+                    );
+                  }
+                });
               });
               break;
           }

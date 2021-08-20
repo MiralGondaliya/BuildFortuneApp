@@ -27,12 +27,18 @@ import Switch from '../components/switch';
 import Menu, {MenuItem} from 'react-native-material-menu';
 import {
   apiCall,
+  getGeneralData,
   getLanguageList,
   getUserSetting,
   updateUserSettings,
 } from '../api';
 import {showErrorMessage} from '../const/flashMessage';
-import Storage, { INITIAL_SCREEN, IS_MANUAL_RESTART, LANGUAGE } from "../const/storage";
+import Storage, {
+  GENERAL_DATA,
+  INITIAL_SCREEN,
+  IS_MANUAL_RESTART,
+  LANGUAGE,
+} from '../const/storage';
 import RNRestart from 'react-native-restart'; // Import package from node modules
 
 const MyPreferences = () => {
@@ -121,18 +127,55 @@ const MyPreferences = () => {
     refMenuLanguage.current.show();
   };
 
-  const handleOnLanguageSelection = async language => {
-    setSelectedLanguage(language.lang_name), hideMenuLanguage();
-    changeAppLanguage(language.lang_short_name);
-    await Storage.storeData(LANGUAGE, JSON.stringify(language));
-    await Storage.storeData(INITIAL_SCREEN, 'Dashboard');
-    if (language.lang_short_name === 'ar') {
-      I18nManager.forceRTL(true);
-    } else {
-      I18nManager.forceRTL(false);
+  const getLanguage = async () => {
+    let mLanguage = await Storage.getData(LANGUAGE);
+    if (mLanguage) {
+      mLanguage = JSON.parse(mLanguage);
     }
-    await Storage.storeData(IS_MANUAL_RESTART, 'true');
-    RNRestart.Restart();
+    return mLanguage;
+  };
+
+  const handleOnLanguageSelection = async language => {
+    let preSelectedLanguage = await getLanguage();
+    hideMenuLanguage();
+    if (preSelectedLanguage?.lang_short_name !== language.lang_short_name) {
+      setSelectedLanguage(language.lang_name);
+      changeAppLanguage(language.lang_short_name);
+      await Storage.storeData(LANGUAGE, JSON.stringify(language));
+      await Storage.storeData(INITIAL_SCREEN, 'Dashboard');
+
+      apiCallGetGeneralData(async () => {
+        if (language.lang_short_name === 'ar') {
+          I18nManager.forceRTL(true);
+        } else {
+          I18nManager.forceRTL(false);
+        }
+        await Storage.storeData(IS_MANUAL_RESTART, 'true');
+        RNRestart.Restart();
+      });
+    } else {
+      let generalData = await Storage.getData(GENERAL_DATA);
+      if (!generalData) {
+        apiCallGetGeneralData(() => {});
+      }
+    }
+  };
+
+  const apiCallGetGeneralData = callback => {
+    apiCall(
+      getGeneralData(),
+      async (data, message) => {
+        if (data) {
+          await Storage.storeData(GENERAL_DATA, JSON.stringify(data));
+          setTimeout(() => {
+            callback();
+          }, 500);
+        } else {
+          showErrorMessage(message);
+        }
+      },
+      true,
+    );
   };
 
   const renderGenderDropdown = item => {

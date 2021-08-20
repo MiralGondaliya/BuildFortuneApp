@@ -173,7 +173,7 @@ I18n.translations = {
     pleaseSelectNationality: 'Please select nationality',
     pleaseSelectGender: 'Please select gender',
     pleaseSelectDateOfBirth: 'Please select date of birth',
-    local: 'Local',
+    local: 'Location',
     pleaseEnterCurrentPass: 'Please enter current password',
     pleaseEnterNewPassword: 'Please enter new password',
     pleaseEnterConfirmPassword: 'Please enter confirm password',
@@ -245,6 +245,7 @@ I18n.translations = {
     UnitedArabEmirates: 'AED',
     UnitedKingdom: 'GBP',
     UnitedStates: 'USD',
+    squareMeters: 'Square Meters',
   },
   ar: {
     welcome: 'مرحبا',
@@ -412,7 +413,7 @@ I18n.translations = {
     pleaseSelectNationality: 'الرجاء اختيار جنسيتك',
     pleaseSelectGender: 'الرجاء اختيار الجنس',
     pleaseSelectDateOfBirth: 'الرجاء تحديد تاريخ الميلاد',
-    local: 'المقر',
+    local: 'موقع',
     pleaseEnterCurrentPass: 'الرجاء كتابة كلمة السر الحالية',
     pleaseEnterNewPassword: 'الرجاء كتابة كلمة السر الجديدة',
     pleaseEnterConfirmPassword: 'الرجاء كتابة تأكيد كلمة السر الجديدة',
@@ -447,7 +448,7 @@ I18n.translations = {
     all: 'الكل',
     type: 'النوع',
     allAds: 'جميع المشاريع',
-    home: 'الصفحة الرئيسية',
+    home: 'الرئيسية',
     search: 'بحث',
     notice: 'تنبيهات',
     createAdd: 'إضافة اعلان',
@@ -480,6 +481,7 @@ I18n.translations = {
     UnitedArabEmirates: 'د.إ',
     UnitedKingdom: '£',
     UnitedStates: '$',
+    squareMeters: 'Square Meters',
   },
 };
 export const changeAppLanguage = languageKey => {

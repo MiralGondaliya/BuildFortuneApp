@@ -49,6 +49,7 @@ const AdsDetail = ({route}) => {
   );
   const [postInfo, setPostInfo] = useState(null);
   const [detailsList, setDetailsList] = useState([]);
+  const [buttonShow, setButtonShow] = useState(false);
   const [contactInfo, setContactInfo] = useState(null);
 
   useEffect(() => {
@@ -62,6 +63,7 @@ const AdsDetail = ({route}) => {
         if (data) {
           setPostInfo(data.post_info);
           setDetailsList(data.details_list);
+          setButtonShow(isMyAdsDetail ? false : data?.button_show === 1);
           console.log(JSON.stringify(data));
         } else {
           showErrorMessage(message);
@@ -188,7 +190,7 @@ const AdsDetail = ({route}) => {
                 )
               }
             />
-            {!isMyAdsDetail ? (
+            {buttonShow ? (
               <View style={styles.buttonContainer}>
                 <Button
                   title={I18n.t('viewContactDetails')}

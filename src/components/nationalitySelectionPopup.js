@@ -23,6 +23,7 @@ import BackButton from './backButton';
 import I18n from '../i18n/i18n';
 import {apiCall, getCountryList} from '../api';
 import {showErrorMessage} from '../const/flashMessage';
+import { getCategoriesFromStorage, getCountries, getCountriesInApp } from "../const/utils";
 
 const NationalitySelectionPopup = ({
   showModal,
@@ -41,18 +42,24 @@ const NationalitySelectionPopup = ({
     }
   }, []);
 
-  const apiCallGetCountryList = () => {
-    apiCall(
-      getCountryList(limited ? 1 : 0),
-      (data, message) => {
-        if (data) {
-          setCountries(data.country_list);
-        } else {
-          showErrorMessage(message);
-        }
-      },
-      false,
-    );
+  const apiCallGetCountryList = async () => {
+    let countryListInApp = await getCountriesInApp();
+    let countryList = await getCountries();
+    if (countryListInApp || countryList) {
+      setCountries(limited ? countryListInApp : countryList);
+    } else {
+      // apiCall(
+      //   getCountryList(limited ? 1 : 0),
+      //   (data, message) => {
+      //     if (data) {
+      //       setCountries(data.country_list);
+      //     } else {
+      //       showErrorMessage(message);
+      //     }
+      //   },
+      //   false,
+      // );
+    }
   };
 
   const renderHeader = () => {

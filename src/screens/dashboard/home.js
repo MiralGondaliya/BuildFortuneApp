@@ -93,7 +93,7 @@ const Home = ({navigation}) => {
     } else {
       return (
         <View style={styles.headerContainer}>
-          <Text style={styles.txtHelloGuest}>Hello</Text>
+          <Text style={styles.txtHelloGuest}>{I18n.t('hello')}</Text>
           <Image style={styles.profilePicGuest} source={IMAGES.guest_ph} />
         </View>
       );

@@ -116,13 +116,15 @@ const styles = StyleSheet.create({
     backgroundColor: COLORS.white,
     ...Shadow.dropShadow,
     ...MarginStyle.mx16,
-    ...PaddingStyle.pB8,
     ...MarginStyle.mB24,
   },
   containerShadow: {
     borderRadius: 20,
+    backgroundColor: 'white',
     ...Shadow.dropShadow,
+    elevation: 0,
     overflow: 'hidden',
+    ...PaddingStyle.pB8,
   },
   imageContainer: {
     width: '100%',
@@ -134,8 +136,7 @@ const styles = StyleSheet.create({
   },
   priceView: {
     backgroundColor: COLORS.red,
-    borderTopRightRadius: I18nManager.isRTL ? 0 : 20,
-    borderTopLeftRadius: I18nManager.isRTL ? 20 : 0,
+    borderTopRightRadius: 20,
     position: 'absolute',
     left: 0,
     bottom: 0,

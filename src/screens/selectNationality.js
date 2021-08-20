@@ -17,6 +17,7 @@ import Storage, {NATIONALITY} from '../const/storage';
 import NavigationService from '../navigation/NavigationService';
 import {apiCall, getCountryList} from '../api';
 import {showErrorMessage} from '../const/flashMessage';
+import {getCountriesInApp} from '../const/utils';
 
 const SelectNationality = ({route}) => {
   //const {t} = useTranslation();
@@ -27,21 +28,27 @@ const SelectNationality = ({route}) => {
     apiCallGetCountryList();
   }, []);
 
-  const apiCallGetCountryList = () => {
-    apiCall(
-      getCountryList(1),
-      (data, message) => {
-        console.log(data);
-        console.log(message);
-        if (data) {
-          setCountries(data.country_list);
-          prepareCountryListForSelection(data.country_list);
-        } else {
-          showErrorMessage(message);
-        }
-      },
-      true,
-    );
+  const apiCallGetCountryList = async () => {
+    let countriesInApp = await getCountriesInApp();
+    if (countriesInApp) {
+      setCountries(countriesInApp);
+      prepareCountryListForSelection(countriesInApp);
+    } else {
+      // apiCall(
+      //   getCountryList(1),
+      //   (data, message) => {
+      //     console.log(data);
+      //     console.log(message);
+      //     if (data) {
+      //       setCountries(data.country_list);
+      //       prepareCountryListForSelection(data.country_list);
+      //     } else {
+      //       showErrorMessage(message);
+      //     }
+      //   },
+      //   true,
+      // );
+    }
   };
 
   const prepareCountryListForSelection = countryList => {
@@ -70,7 +77,7 @@ const SelectNationality = ({route}) => {
         style={{
           ...ContainerStyles.container,
         }}>
-        <GetStartedHeader hideBackButton={true}/>
+        <GetStartedHeader hideBackButton={true} />
         <View style={[{flex: 1}, GlobalStyles.footerContainer]}>
           <View
             style={{

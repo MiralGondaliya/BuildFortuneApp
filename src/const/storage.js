@@ -11,6 +11,7 @@ export const APPLE_AUTH_DATA = 'appleAuthData';
 export const INITIAL_SCREEN = 'initialScreen';
 export const IS_MANUAL_RESTART = 'isManualRestart';
 export const FCM_TOKEN = 'fcmToken';
+export const GENERAL_DATA = 'generalData';
 
 export default class Storage {
   static storeData(key, value) {

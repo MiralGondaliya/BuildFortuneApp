@@ -16,6 +16,7 @@ import {Platform} from 'react-native';
 import messaging, {firebase} from '@react-native-firebase/messaging';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import Storage, {FCM_TOKEN} from '../../const/storage';
+import {apiCall, updateDeviceToken} from '../../api';
 
 PushNotification.configure({
   onNotification: function (notification) {
@@ -190,13 +191,13 @@ const Dashboard = ({route, navigation}) => {
 
   const apiCallUpdateDeviceToken = token => {
     Storage.storeData(FCM_TOKEN, token);
-    // updateDeviceTokenNew(token)
-    //   .then(response => {
-    //     console.log(response.data);
-    //   })
-    //   .catch(error => {
-    //     console.log(error);
-    //   });
+    apiCall(
+      updateDeviceToken(token),
+      (data, message) => {
+        console.log(data);
+      },
+      false,
+    );
   };
 
   const Tab = createBottomTabNavigator();

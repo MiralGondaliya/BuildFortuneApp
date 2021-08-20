@@ -1,6 +1,6 @@
 import isPresent from 'is-present';
 import {has} from 'lodash';
-import Storage, {LANGUAGE, USER_DATA} from './storage';
+import Storage, {GENERAL_DATA, LANGUAGE, USER_DATA} from './storage';
 import {apiCall, logout} from '../api';
 import NavigationService from '../navigation/NavigationService';
 import {showErrorMessage} from './flashMessage';
@@ -112,4 +112,34 @@ export const getCurrencyFromCountryId = countryId => {
   } else {
     return I18n.t('UnitedStates');
   }
+};
+
+export const getGeneralData = async () => {
+  let data = await Storage.getData(GENERAL_DATA);
+  if (data) {
+    data = JSON.parse(data);
+    return data;
+  } else {
+    return null;
+  }
+};
+
+export const getCategoriesFromStorage = async () => {
+  let generalData = await getGeneralData();
+  return generalData?.categories;
+};
+
+export const getFeaturedCategories = async () => {
+  let generalData = await getGeneralData();
+  return generalData?.featured_categories;
+};
+
+export const getCountries = async () => {
+  let generalData = await getGeneralData();
+  return generalData?.countries;
+};
+
+export const getCountriesInApp = async () => {
+  let generalData = await getGeneralData();
+  return generalData?.countries_inapp;
 };

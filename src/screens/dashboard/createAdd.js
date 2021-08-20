@@ -1,5 +1,12 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {
   ContainerStyles,
   FontColor,
@@ -23,10 +30,14 @@ import Checkbox from '../../components/checkBox';
 import {ImagePickerHelper} from '../../const/imagePickerHelper';
 import Button from '../../components/button';
 import {showErrorMessage, showSuccessMessage} from '../../const/flashMessage';
-import {apiCall, createAds, getCategoryList} from '../../api';
+import {apiCall, createAds} from '../../api';
 import moment from 'moment';
 import NationalitySelectionPopup from '../../components/nationalitySelectionPopup';
-import {filterStringByNumber, isEmailValid} from '../../const/utils';
+import {
+  filterStringByNumber,
+  getCategoriesFromStorage,
+  isEmailValid,
+} from '../../const/utils';
 
 const CreateAdd = () => {
   //const {t} = useTranslation();
@@ -158,24 +169,30 @@ const CreateAdd = () => {
     setInvestorCharacteristicsInArabic('');
   };
 
-  useEffect(() => {}, [categories]);
+  // useEffect(() => {}, [categories]);
   useEffect(() => {
     apiCallGetCategories(() => {});
   }, []);
 
-  const apiCallGetCategories = onResponseSuccess => {
-    apiCall(
-      getCategoryList(),
-      (data, message) => {
-        if (data) {
-          setCategories(data.category_list);
-          onResponseSuccess && onResponseSuccess();
-        } else {
-          showErrorMessage(message);
-        }
-      },
-      false,
-    );
+  const apiCallGetCategories = async onResponseSuccess => {
+    let categoriesFromStorage = await getCategoriesFromStorage();
+    if (categoriesFromStorage) {
+      setCategories(categoriesFromStorage);
+      onResponseSuccess && onResponseSuccess();
+    } else {
+      // apiCall(
+      //   getCategoryList(),
+      //   (data, message) => {
+      //     if (data) {
+      //       setCategories(data.category_list);
+      //       onResponseSuccess && onResponseSuccess();
+      //     } else {
+      //       showErrorMessage(message);
+      //     }
+      //   },
+      //   false,
+      // );
+    }
   };
 
   const renderCountryCodePicker = isWhatsApp => (
@@ -414,7 +431,7 @@ const CreateAdd = () => {
       dropdown: true,
       setValue: value => {},
       leftComponent: null,
-      rightIcon: IMAGES.attachment,
+      rightIcon: IMAGES.attachments,
       validation: () => {
         let isValid = !!(attachImage && attachImageUri);
         if (!isValid) {
@@ -431,7 +448,7 @@ const CreateAdd = () => {
       dropdown: true,
       setValue: value => {},
       leftComponent: null,
-      rightIcon: IMAGES.attachment,
+      rightIcon: IMAGES.attachments,
       validation: () => {
         return true;
       },
@@ -444,7 +461,7 @@ const CreateAdd = () => {
       dropdown: true,
       setValue: value => {},
       leftComponent: null,
-      rightIcon: IMAGES.attachment,
+      rightIcon: IMAGES.attachments,
       validation: () => {
         return true;
       },
@@ -586,7 +603,7 @@ const CreateAdd = () => {
     },
     {
       title: I18n.t('spaceOpt'),
-      placeholder: I18n.t('amount'),
+      placeholder: I18n.t('squareMeters'),
       value: space,
       keyboardType: 'number-pad',
       dropdown: false,
@@ -856,7 +873,7 @@ const CreateAdd = () => {
       <View style={styles.selectCategoryContainer}>
         <TitleView
           title={I18n.t('select')}
-          subTitle={I18n.t('category')}
+          subTitle={I18n.t('type')}
           small={true}
         />
         <TouchableOpacity
@@ -1031,20 +1048,50 @@ const CreateAdd = () => {
             onPress={() => {
               handleOnPress(item.placeholder, item);
             }}>
-            <FloatingTextInput
-              onChange={value => {
-                item.setValue(value);
-              }}
-              multiLine={item.multiLine ?? false}
-              hintColor={COLORS.gray_hint_light}
-              leftComponent={item.leftComponent}
-              secret={item.secret}
-              value={item.value}
-              limit={item.limit}
-              keyboardType={item.keyboardType}
-              placeholder={item.placeholder}
-              rightIcon={item.rightIcon}
-            />
+            <View
+              style={{
+                flexDirection: 'row',
+                borderBottomColor: COLORS.gray_border,
+                borderBottomWidth: 1,
+              }}>
+              {/*<FloatingTextInput*/}
+              {/*  onChange={value => {*/}
+              {/*    item.setValue(value);*/}
+              {/*  }}*/}
+              {/*  multiLine={item.multiLine ?? false}*/}
+              {/*  hintColor={COLORS.gray_hint_light}*/}
+              {/*  leftComponent={item.leftComponent}*/}
+              {/*  secret={item.secret}*/}
+              {/*  value={item.value}*/}
+              {/*  limit={item.limit}*/}
+              {/*  keyboardType={item.keyboardType}*/}
+              {/*  placeholder={item.placeholder}*/}
+              {/*  rightIcon={item.rightIcon}*/}
+              {/*/>*/}
+              <TextInput
+                style={{
+                  ...FontSize.fontRegular14,
+                  ...MarginStyle.mx8,
+                  flex: 1,
+                }}
+                multiline={item.multiLine ?? false}
+                placeholderTextColor={COLORS.gray_hint_light}
+                secureTextEntry={item.secret}
+                value={item.value}
+                onChangeText={value => item.setValue(value)}
+                maxLength={item.limit ?? Number.MAX_VALUE}
+                keyboardType={item.keyboardType}
+                placeholder={item.placeholder}
+              />
+              {item.rightIcon && (
+                <Image
+                  source={item.rightIcon}
+                  resizeMode={'contain'}
+                  style={{width: 15, height: 15, alignSelf: 'center'}}
+                />
+              )}
+            </View>
+
             {item.placeholder === I18n.t('yesOrNo')
               ? renderMenuYesNo(item)
               : null}
@@ -1221,7 +1268,7 @@ const CreateAdd = () => {
           ) : null}
         </View>
         <NationalitySelectionPopup
-          limited={true}
+          limited={showCountyPicker}
           countryOrigin={true}
           showModal={
             showCountyCodePickerPhone ||

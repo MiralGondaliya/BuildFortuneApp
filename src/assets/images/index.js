@@ -44,4 +44,5 @@ export const IMAGES = {
   empty_ad: require('./empty_ad.png'),
   empty_noti: require('./empty_noti.png'),
   noti_ph: require('./noti_ph.png'),
+  attachments: require('./attachments.png'),
 };

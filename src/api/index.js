@@ -561,3 +561,26 @@ export const getTrendingPost = async () => {
 
   return Axios.post(BASE_URL + 'app-post-list', formData);
 };
+
+export const getGeneralData = async () => {
+  let languageId = await language();
+  let formData = new FormData();
+  formData.append('language_id', languageId);
+  formData.append('post_language_id', languageId);
+
+  return Axios.post(BASE_URL + 'app-general-data', formData);
+};
+
+export const updateDeviceToken = async fcm_token => {
+  let isLogin = await isLogIn();
+  if (isLogin) {
+    let data = await auth();
+    let token = data.token;
+
+    let formData = new FormData();
+    formData.append('user_token', token);
+    formData.append('fcm_token', fcm_token);
+
+    return Axios.post(BASE_URL + 'app-user-update-fcm', formData);
+  }
+};

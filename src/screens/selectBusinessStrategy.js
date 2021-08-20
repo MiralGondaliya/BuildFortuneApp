@@ -16,7 +16,7 @@ import SelectableButtons from '../components/selectableButtons';
 import {IMAGES} from '../assets/images';
 import Button from '../components/button';
 import NavigationService from '../navigation/NavigationService';
-import {isLogIn} from '../const/utils';
+import {getFeaturedCategories, isLogIn} from '../const/utils';
 import {apiCall, getCategoryList} from '../api';
 
 const SelectBusinessStrategy = () => {
@@ -26,16 +26,21 @@ const SelectBusinessStrategy = () => {
     apiCallGetCategories();
   }, []);
 
-  const apiCallGetCategories = () => {
-    apiCall(
-      getCategoryList(1),
-      (data, message) => {
-        if (data) {
-          setCategories(data.category_list);
-        }
-      },
-      false,
-    );
+  const apiCallGetCategories = async () => {
+    let featuredCategories = await getFeaturedCategories();
+    if (featuredCategories) {
+      setCategories(featuredCategories);
+    } else {
+      // apiCall(
+      //   getCategoryList(1),
+      //   (data, message) => {
+      //     if (data) {
+      //       setCategories(data.category_list);
+      //     }
+      //   },
+      //   false,
+      // );
+    }
   };
 
   const BUSINESS_STRATEGY = [

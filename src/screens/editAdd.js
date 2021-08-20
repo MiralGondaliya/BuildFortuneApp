@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import {Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import {
   ContainerStyles,
   FontColor,
@@ -26,7 +26,7 @@ import {showErrorMessage, showSuccessMessage} from '../const/flashMessage';
 import {apiCall, createAds, getCategoryList, getMyPostDetail} from '../api';
 import moment from 'moment';
 import NationalitySelectionPopup from '../components/nationalitySelectionPopup';
-import { filterStringByNumber, getNavigationParams, isEmailValid } from "../const/utils";
+import { filterStringByNumber, getCategoriesFromStorage, getNavigationParams, isEmailValid } from "../const/utils";
 import BackButton from '../components/backButton';
 
 const EditAdd = ({route}) => {
@@ -119,19 +119,25 @@ const EditAdd = ({route}) => {
     apiCallGetCategories(() => {});
   }, []);
 
-  const apiCallGetCategories = onResponseSuccess => {
-    apiCall(
-      getCategoryList(),
-      (data, message) => {
-        if (data) {
-          setCategories(data.category_list);
-          onResponseSuccess && onResponseSuccess();
-        } else {
-          showErrorMessage(message);
-        }
-      },
-      true,
-    );
+  const apiCallGetCategories = async onResponseSuccess => {
+    let categoriesFromStorage = await getCategoriesFromStorage();
+    if (categoriesFromStorage) {
+      setCategories(categoriesFromStorage);
+      onResponseSuccess && onResponseSuccess();
+    } else {
+      // apiCall(
+      //   getCategoryList(),
+      //   (data, message) => {
+      //     if (data) {
+      //       setCategories(data.category_list);
+      //       onResponseSuccess && onResponseSuccess();
+      //     } else {
+      //       showErrorMessage(message);
+      //     }
+      //   },
+      //   false,
+      // );
+    }
   };
 
   const apiCallGetMyPostDetail = () => {
@@ -471,7 +477,7 @@ const EditAdd = ({route}) => {
       dropdown: true,
       setValue: value => {},
       leftComponent: null,
-      rightIcon: IMAGES.attachment,
+      rightIcon: IMAGES.attachments,
       validation: () => {
         let isValid = !!attachImageUri;
         if (!isValid) {
@@ -488,7 +494,7 @@ const EditAdd = ({route}) => {
       dropdown: true,
       setValue: value => {},
       leftComponent: null,
-      rightIcon: IMAGES.attachment,
+      rightIcon: IMAGES.attachments,
       validation: () => {
         return true;
       },
@@ -501,7 +507,7 @@ const EditAdd = ({route}) => {
       dropdown: true,
       setValue: value => {},
       leftComponent: null,
-      rightIcon: IMAGES.attachment,
+      rightIcon: IMAGES.attachments,
       validation: () => {
         return true;
       },
@@ -643,7 +649,7 @@ const EditAdd = ({route}) => {
     },
     {
       title: I18n.t('spaceOpt'),
-      placeholder: I18n.t('amount'),
+      placeholder: I18n.t('squareMeters'),
       value: space,
       keyboardType: 'number-pad',
       dropdown: false,
@@ -1092,20 +1098,50 @@ const EditAdd = ({route}) => {
             onPress={() => {
               handleOnPress(item.placeholder, item);
             }}>
-            <FloatingTextInput
-              onChange={value => {
-                item.setValue(value);
-              }}
-              multiLine={item.multiLine ?? false}
-              hintColor={COLORS.gray_hint_light}
-              leftComponent={item.leftComponent}
-              secret={item.secret}
-              value={item.value}
-              limit={item.limit ?? 1000}
-              keyboardType={item.keyboardType}
-              placeholder={item.placeholder}
-              rightIcon={item.rightIcon}
-            />
+            <View
+              style={{
+                flexDirection: 'row',
+                borderBottomColor: COLORS.gray_border,
+                borderBottomWidth: 1,
+              }}>
+              {/*<FloatingTextInput*/}
+              {/*  onChange={value => {*/}
+              {/*    item.setValue(value);*/}
+              {/*  }}*/}
+              {/*  multiLine={item.multiLine ?? false}*/}
+              {/*  hintColor={COLORS.gray_hint_light}*/}
+              {/*  leftComponent={item.leftComponent}*/}
+              {/*  secret={item.secret}*/}
+              {/*  value={item.value}*/}
+              {/*  limit={item.limit}*/}
+              {/*  keyboardType={item.keyboardType}*/}
+              {/*  placeholder={item.placeholder}*/}
+              {/*  rightIcon={item.rightIcon}*/}
+              {/*/>*/}
+              <TextInput
+                style={{
+                  ...FontSize.fontRegular14,
+                  ...MarginStyle.mx8,
+                  flex: 1,
+                }}
+                multiline={item.multiLine ?? false}
+                placeholderTextColor={COLORS.gray_hint_light}
+                secureTextEntry={item.secret}
+                value={item.value}
+                onChangeText={value => item.setValue(value)}
+                maxLength={item.limit ?? Number.MAX_VALUE}
+                keyboardType={item.keyboardType}
+                placeholder={item.placeholder}
+              />
+              {item.rightIcon && (
+                <Image
+                  source={item.rightIcon}
+                  resizeMode={'contain'}
+                  style={{width: 15, height: 15, alignSelf: 'center'}}
+                />
+              )}
+            </View>
+
             {item.placeholder === I18n.t('yesOrNo')
               ? renderMenuYesNo(item)
               : null}
@@ -1281,7 +1317,7 @@ const EditAdd = ({route}) => {
           ) : null}
         </View>
         <NationalitySelectionPopup
-          limited={true}
+          limited={showCountyPicker}
           countryOrigin={true}
           showModal={
             showCountyCodePickerPhone ||
