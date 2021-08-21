@@ -1,5 +1,12 @@
 import React from 'react';
-import { View, StyleSheet, Image, Text, TouchableOpacity, I18nManager } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Image,
+  Text,
+  TouchableOpacity,
+  I18nManager,
+} from 'react-native';
 import {
   ContainerStyles,
   MarginStyle,

@@ -32,6 +32,7 @@ import {ImagePickerHelper} from '../const/imagePickerHelper';
 import {apiCall, getProfile, updateProfile, updateProfileImage} from '../api';
 import {showErrorMessage, showSuccessMessage} from '../const/flashMessage';
 import NationalitySelectionPopup from '../components/nationalitySelectionPopup';
+import NavigationService from '../navigation/NavigationService';
 
 const ProfileSettings = () => {
   //const {t} = useTranslation();
@@ -125,8 +126,10 @@ const ProfileSettings = () => {
       ),
       (data, message) => {
         if (data) {
-          console.log(data);
           showSuccessMessage(message);
+          setTimeout(() => {
+            NavigationService.goBack();
+          }, 2000);
         } else {
           showErrorMessage(message);
         }

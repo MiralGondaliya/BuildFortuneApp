@@ -88,10 +88,10 @@ const EditAdd = ({route}) => {
   //Contact information
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [countryCodePhoneNumber, setCountryCodePhoneNumber] = useState('+1');
+  const [countryCodePhoneNumber, setCountryCodePhoneNumber] = useState('1');
   const [whatsAppNumber, setWhatsAppNumber] = useState('');
   const [countryCodeWhatsAppNumber, setCountryCodeWhatsAppNumber] =
-    useState('+1');
+    useState('1');
   const [isCheckedContactInfo, setCheckContactInfo] = useState(false);
 
   //Local information
@@ -1135,6 +1135,7 @@ const EditAdd = ({route}) => {
               {/*  placeholder={item.placeholder}*/}
               {/*  rightIcon={item.rightIcon}*/}
               {/*/>*/}
+              {item?.leftComponent && item.leftComponent}
               <TextInput
                 style={{
                   ...FontSize.fontRegular14,

@@ -63,15 +63,8 @@ const BannerCards = ({entries}) => {
       <Carousel
         data={entries}
         renderItem={item => renderItem(item.item)}
-        sliderWidth={sliderWidth}
-        itemWidth={sliderWidth}
-        // loop={true}
-        // autoplay={true}
-        autoplayDelay={10000}
-        autoplayInterval={5000}
-        layout={'default'}
-        activeSlideOffset={50}
-        callbackOffsetMargin={50}
+        sliderWidth={Dimensions.get('window').width}
+        itemWidth={Dimensions.get('window').width}
         onSnapToItem={index => setActiveSlide(index)}
       />
       {pagination()}

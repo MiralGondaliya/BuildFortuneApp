@@ -40,13 +40,25 @@ const WebContent = ({route}) => {
           let cms_pages = data.cms_pages;
           switch (title) {
             case I18n.t('aboutUs'):
-              setUrl(cms_pages.about);
+              language().then(languageId => {
+                if (languageId) {
+                  setUrl(`${cms_pages.about}?language_id=${languageId}`);
+                }
+              });
               break;
             case I18n.t('privacyPolicy'):
-              setUrl(cms_pages.privacy);
+              language().then(languageId => {
+                if (languageId) {
+                  setUrl(`${cms_pages.privacy}?language_id=${languageId}`);
+                }
+              });
               break;
             case I18n.t('termsAndConditions'):
-              setUrl(cms_pages.terms);
+              language().then(languageId => {
+                if (languageId) {
+                  setUrl(`${cms_pages.terms}?language_id=${languageId}`);
+                }
+              });
               break;
             case I18n.t('contactUs'):
               auth().then(response => {

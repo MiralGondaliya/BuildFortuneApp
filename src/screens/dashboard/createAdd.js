@@ -1072,6 +1072,7 @@ const CreateAdd = () => {
               {/*  placeholder={item.placeholder}*/}
               {/*  rightIcon={item.rightIcon}*/}
               {/*/>*/}
+              {item?.leftComponent && item.leftComponent}
               <TextInput
                 style={{
                   ...FontSize.fontRegular14,

@@ -67,7 +67,7 @@ const MyPreferences = () => {
           let settings = data.settings;
           setIsNotification(settings.push_alert === 1);
           setIsSmsAlert(settings.sms_alert === 1);
-          setSelectedLanguage(settings.language_id === 1 ? 'English' : 'ىبرع');
+          setSelectedLanguage(settings.language_id === 1 ? 'English' : 'عربى');
         }
       },
       true,
