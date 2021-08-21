@@ -122,6 +122,7 @@ const Dashboard = ({route, navigation}) => {
           bigPictureUrl: data.image,
           tag: data?.post_id,
           data: data ?? {},
+          smallIcon: IMAGES.noti,
         });
       });
     }
@@ -227,7 +228,7 @@ const Dashboard = ({route, navigation}) => {
       icon_selected: IMAGES.notice,
     },
     {
-      name: I18n.t('profile'),
+      name: I18n.t('account'),
       content: Profile,
       icon: IMAGES.profile,
       icon_selected: IMAGES.profile,

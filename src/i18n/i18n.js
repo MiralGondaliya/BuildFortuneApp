@@ -246,6 +246,7 @@ I18n.translations = {
     UnitedKingdom: 'GBP',
     UnitedStates: 'USD',
     squareMeters: 'Square Meters',
+    account: 'Account',
   },
   ar: {
     welcome: 'مرحبا',
@@ -482,6 +483,7 @@ I18n.translations = {
     UnitedKingdom: '£',
     UnitedStates: '$',
     squareMeters: 'Square Meters',
+    account: 'Account',
   },
 };
 export const changeAppLanguage = languageKey => {

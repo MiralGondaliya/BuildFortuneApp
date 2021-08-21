@@ -28,11 +28,7 @@ const BottomNavigationTab = ({
   return (
     <TouchableOpacity
       onPress={() => {
-        if (
-          name === I18n.t('profile') ||
-          name === I18n.t('createAdd') ||
-          name === I18n.t('notice')
-        ) {
+        if (name === I18n.t('createAdd') || name === I18n.t('notice')) {
           navigate();
         } else {
           navigation.navigate(name);

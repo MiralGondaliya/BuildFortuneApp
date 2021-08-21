@@ -46,11 +46,11 @@ const Login = () => {
 
     apiCall(
       login(email, password),
-      (data, message) => {
+      async (data, message) => {
         if (data) {
           let user_details = data.user_details;
-          Storage.storeData(USER_DATA, JSON.stringify(user_details));
-          apiCallSaveUserSetting();
+          await Storage.storeData(USER_DATA, JSON.stringify(user_details));
+          await apiCallSaveUserSetting();
           NavigationService.reset('Dashboard');
         } else {
           showErrorMessage(message);
