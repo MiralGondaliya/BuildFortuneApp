@@ -1,5 +1,13 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { I18nManager, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import {
+  I18nManager,
+  Image,
+  StyleSheet,
+  Text,
+  TextInput,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {
   ContainerStyles,
   FontColor,
@@ -26,7 +34,12 @@ import {showErrorMessage, showSuccessMessage} from '../const/flashMessage';
 import {apiCall, createAds, getCategoryList, getMyPostDetail} from '../api';
 import moment from 'moment';
 import NationalitySelectionPopup from '../components/nationalitySelectionPopup';
-import { filterStringByNumber, getCategoriesFromStorage, getNavigationParams, isEmailValid } from "../const/utils";
+import {
+  filterStringByNumber,
+  getCategoriesFromStorage,
+  getNavigationParams,
+  isEmailValid,
+} from '../const/utils';
 import BackButton from '../components/backButton';
 
 const EditAdd = ({route}) => {
@@ -1304,9 +1317,12 @@ const EditAdd = ({route}) => {
             <View>
               {renderForm(FILL_INFO, 'main')}
               {renderForm(CONTACT_INFO, 'contact')}
-              {selectType !== I18n.t('sellMyBusinessShares')
+              {selectType === I18n.t('sellMyBusiness')
                 ? renderForm(LOCAL_INFO, 'local')
-                : renderForm(INVESTOR_INFO, 'investor')}
+                : null}
+              {selectType === I18n.t('sellMyBusinessShares')
+                ? renderForm(INVESTOR_INFO, 'investor')
+                : null}
               {selectType !== I18n.t('sellMyBusinessIdea')
                 ? renderForm(SOCIAL_INFO, 'social')
                 : renderForm(ADDITIONAL_INFO, 'additional')}

@@ -1255,9 +1255,13 @@ const CreateAdd = () => {
             <View>
               {renderForm(FILL_INFO, 'main')}
               {renderForm(CONTACT_INFO, 'contact')}
-              {selectType !== I18n.t('sellMyBusinessShares')
+              {selectType === I18n.t('sellMyBusiness')
                 ? renderForm(LOCAL_INFO, 'local')
-                : renderForm(INVESTOR_INFO, 'investor')}
+                : null}
+              {selectType === I18n.t('sellMyBusinessShares')
+                ? renderForm(INVESTOR_INFO, 'investor')
+                : null}
+
               {selectType !== I18n.t('sellMyBusinessIdea')
                 ? renderForm(SOCIAL_INFO, 'social')
                 : renderForm(ADDITIONAL_INFO, 'additional')}
