@@ -7,6 +7,7 @@ import App from './App';
 import {name as appName} from './app.json';
 import messaging from '@react-native-firebase/messaging';
 import PushNotification from 'react-native-push-notification';
+import {COLORS} from './src/styles/colors';
 
 messaging().setBackgroundMessageHandler(async remoteMessage => {
   // Update a users messages list using AsyncStorage
@@ -49,6 +50,8 @@ messaging().setBackgroundMessageHandler(async remoteMessage => {
     channelId: remoteMessage.messageId,
     bigPictureUrl: data.image,
     data: data ?? {},
+    smallIcon: 'noti',
+    color: COLORS.primary,
   });
 });
 AppRegistry.registerComponent(appName, () => App);

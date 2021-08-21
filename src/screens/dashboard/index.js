@@ -19,6 +19,8 @@ import Storage, {FCM_TOKEN} from '../../const/storage';
 import {apiCall, updateDeviceToken} from '../../api';
 
 PushNotification.configure({
+  smallIcon: 'noti',
+  color: COLORS.primary,
   onNotification: function (notification) {
     console.log('NOTIFICATION:', notification);
   },
@@ -122,7 +124,8 @@ const Dashboard = ({route, navigation}) => {
           bigPictureUrl: data.image,
           tag: data?.post_id,
           data: data ?? {},
-          smallIcon: IMAGES.noti,
+          smallIcon: 'noti',
+          color: COLORS.primary,
         });
       });
     }
