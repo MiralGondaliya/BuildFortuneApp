@@ -166,7 +166,7 @@ const Profile = ({navigation}) => {
     },
     {
       title: I18n.t('signOut'),
-      description: I18n.t('logout'),
+      description: I18n.t('logoutOrSwitchAccount'),
       onPress: () => {
         setShowLogout(true);
       },
