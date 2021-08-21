@@ -5,7 +5,7 @@ I18n.fallBacks = true;
 I18n.translations = {
   en: {
     welcome: 'Welcome',
-    welcomeMessage: 'Welcome to Build Fortune, A platform for buying, selling and partnering in businesses.',
+    welcomeMessage: 'Welcome to Build Fortune, A platform for buying, selling businesses and business shares.',
     getStarted: 'Get Started >',
     signin: 'Signin',
     signInToContinue: 'Sign in to continue',
@@ -186,7 +186,7 @@ I18n.translations = {
     attachImages3: 'Attach images 3',
     establishmentYearOpt: 'Establishment Year (Optional)',
     haveBusinessModal: 'Does it have a business modal?',
-    includeAFasabilityStudy: 'Does it includes a feasibility study?',
+    includeAFasabilityStudy: 'Does it include a feasibility study?',
     haveBrandingStrayegy: 'Does it have a branding strategy?',
     haveMarketing: 'Dose it have a marketing strategy?',
     additional: 'Additional',
