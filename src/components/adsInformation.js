@@ -10,6 +10,7 @@ import {
 import TitleView from './titleView';
 import {
   ContainerStyles,
+  FontColor,
   FontSize,
   MarginStyle,
   PaddingStyle,
@@ -18,6 +19,11 @@ import {COLORS} from '../styles/colors';
 
 const AdsInformation = ({title, subTitle, information}) => {
   const renderSubItem = item => {
+    const highlight =
+      item.type === 'link' ||
+      item.type === 'email' ||
+      item.type === 'phone_no' ||
+      item.type === 'whatsapp';
     return (
       <View style={styles.subInfoContainer}>
         <Text style={styles.txtSubInfoKey}>{item.key}</Text>
@@ -34,11 +40,14 @@ const AdsInformation = ({title, subTitle, information}) => {
                 Linking.openURL(`tel:${item.value}`);
                 break;
               case 'whatsapp':
-                Linking.openURL(`tel:${item.value}`);
+                Linking.openURL(`whatsapp://send?&phone=${item.value}`);
                 break;
             }
           }}
-          style={styles.txtSubInfoValue}>
+          style={[
+            styles.txtSubInfoValue,
+            highlight && {color: COLORS.primary},
+          ]}>
           {item.value}
         </Text>
       </View>
@@ -94,6 +103,7 @@ const styles = StyleSheet.create({
     ...FontSize.fontLight14,
     ...PaddingStyle.px16,
     ...PaddingStyle.py16,
+    ...FontColor.colorBlack,
   },
 });
 
