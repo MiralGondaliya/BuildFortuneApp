@@ -1,5 +1,11 @@
 import React from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {
+  I18nManager,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from 'react-native';
 import {
   ContainerStyles,
   FontColor,
@@ -24,10 +30,21 @@ const TitleView = ({
   //const {t} = useTranslation();
   return (
     <View style={[styles.container, containerStyle && containerStyle]}>
-      <Text style={[styles.title, small && styles.titleSmall]}>{title}</Text>
-      <Text style={[styles.subTitle, small && styles.titleSmall]}>
-        {subTitle}
-      </Text>
+      {I18nManager.isRTL ? (
+        <Text style={[styles.subTitle, small && styles.titleSmall]}>
+          {subTitle}
+        </Text>
+      ) : (
+        <Text style={[styles.title, small && styles.titleSmall]}>{title}</Text>
+      )}
+      {I18nManager.isRTL ? (
+        <Text style={[styles.title, small && styles.titleSmall]}>{title}</Text>
+      ) : (
+        <Text style={[styles.subTitle, small && styles.titleSmall]}>
+          {subTitle}
+        </Text>
+      )}
+
       <View style={GlobalStyles.space} />
       {onPressViewAll && (
         <TouchableOpacity
@@ -57,6 +74,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontFamily: FONTS.medium,
     lineHeight: 40,
+    marginStart: I18nManager.isRTL ? 8 : 0,
   },
   titleSmall: {
     fontSize: 20,
@@ -65,7 +83,7 @@ const styles = StyleSheet.create({
     ...FontColor.colorBlack,
     fontSize: 26,
     fontFamily: FONTS.extra_light,
-    ...MarginStyle.mx8,
+    marginStart: I18nManager.isRTL ? 0 : 8,
   },
   viewAllLabel: {
     ...FontColor.colorBlack,

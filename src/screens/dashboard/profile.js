@@ -164,6 +164,13 @@ const Profile = ({navigation}) => {
         NavigationService.navigate('MyPreferences');
       },
     },
+    {
+      title: I18n.t('signOut'),
+      description: I18n.t('logout'),
+      onPress: () => {
+        setShowLogout(true);
+      },
+    },
   ];
 
   const navigateToWebView = (title, subTitle) => {
@@ -200,13 +207,6 @@ const Profile = ({navigation}) => {
       description: I18n.t('solveYourQueries'),
       onPress: () => {
         navigateToWebView(I18n.t('contactUs'));
-      },
-    },
-    {
-      title: I18n.t('signOut'),
-      description: I18n.t('logoutOrSwitchAccount'),
-      onPress: () => {
-        setShowLogout(true);
       },
     },
   ];

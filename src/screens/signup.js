@@ -295,7 +295,6 @@ const Signup = () => {
               ...FontColor.colorCornFlowerFlue,
               marginTop: -16,
             }}>
-            {I18n.t('register')}
             {I18n.t('createAnewAccount')}
           </Text>
         </View>

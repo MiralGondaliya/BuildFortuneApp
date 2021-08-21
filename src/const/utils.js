@@ -5,6 +5,7 @@ import {apiCall, logout} from '../api';
 import NavigationService from '../navigation/NavigationService';
 import {showErrorMessage} from './flashMessage';
 import I18n from 'react-native-i18n';
+import {I18nManager} from 'react-native';
 
 export function getNavigationParams(routeParams, paramName, defaultValue = '') {
   if (isPresent(routeParams)) {
@@ -54,13 +55,23 @@ export const signOut = async local => {
 };
 
 export const currencyFormat = (num, currencySymbol) => {
-  return (
-    currencySymbol +
-    ' ' +
-    parseFloat(num)
-      .toFixed(0)
-      .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
-  );
+  if (I18nManager.isRTL) {
+    return (
+      parseFloat(num)
+        .toFixed(0)
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,') +
+      ' ' +
+      currencySymbol
+    );
+  } else {
+    return (
+      currencySymbol +
+      ' ' +
+      parseFloat(num)
+        .toFixed(0)
+        .replace(/(\d)(?=(\d{3})+(?!\d))/g, '$1,')
+    );
+  }
 };
 
 export const percentageFormat = num => {

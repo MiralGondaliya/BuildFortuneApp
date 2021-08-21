@@ -1,5 +1,5 @@
 import React from 'react';
-import {View, StyleSheet, Image, Text, TouchableOpacity} from 'react-native';
+import { View, StyleSheet, Image, Text, TouchableOpacity, I18nManager } from "react-native";
 import {
   ContainerStyles,
   MarginStyle,
@@ -53,6 +53,7 @@ const styles = StyleSheet.create({
     width: 10,
     height: 11,
     alignSelf: 'center',
+    transform: [{scaleX: I18nManager.isRTL ? -1 : 1}],
   },
 });
 export default NotificationItem;

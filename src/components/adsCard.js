@@ -8,7 +8,7 @@ const sliderWidth = Dimensions.get('window').width;
 const imageWidth = sliderWidth - 34;
 const imageHeight = imageWidth / 1.5;
 
-const AdsCard = ({entries}) => {
+const AdsCard = ({entries, isLoop, isAutoplay}) => {
   const [activeSlide, setActiveSlide] = useState(0);
 
   const pagination = () => {
@@ -65,10 +65,13 @@ const AdsCard = ({entries}) => {
         renderItem={item => renderItem(item.item)}
         sliderWidth={sliderWidth}
         itemWidth={sliderWidth}
-        loop={true}
-        autoplay={true}
+        loop={isLoop ?? true}
+        autoplay={isAutoplay ?? true}
+        layout={'default'}
         autoplayDelay={10000}
         autoplayInterval={5000}
+        activeSlideOffset={50}
+        callbackOffsetMargin={50}
         onSnapToItem={index => setActiveSlide(index)}
       />
       {entries.length <= 1 ? <View style={{height: 16}} /> : null}

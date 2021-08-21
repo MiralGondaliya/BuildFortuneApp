@@ -1315,6 +1315,7 @@ const styles = StyleSheet.create({
     ...ContainerStyles.containerRow,
     ...MarginStyle.my32,
     ...MarginStyle.mx24,
+    flexDirection:'row-reverse',
   },
   headerTitle: {
     ...LayoutGravity.center,

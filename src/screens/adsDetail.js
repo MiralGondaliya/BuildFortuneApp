@@ -139,7 +139,11 @@ const AdsDetail = ({route}) => {
             backgroundColor: COLORS.primary,
           }}>
           {renderHeader()}
-          <AdsCard entries={postInfo.post_images} />
+          <AdsCard
+            entries={postInfo.post_images}
+            isLoop={false}
+            isAutoplay={false}
+          />
           <View style={GlobalStyles.footerContainerLightSmallRadius}>
             <View style={styles.categoryDetailContainer}>
               <Text style={styles.title}>{postInfo.post_title}</Text>

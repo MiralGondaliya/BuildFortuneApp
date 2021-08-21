@@ -247,6 +247,8 @@ I18n.translations = {
     UnitedStates: 'USD',
     squareMeters: 'Square Meters',
     account: 'Account',
+    logout: 'Logout',
+    comma: ',',
   },
   ar: {
     welcome: 'مرحبا',
@@ -484,6 +486,8 @@ I18n.translations = {
     UnitedStates: '$',
     squareMeters: 'Square Meters',
     account: 'Account',
+    logout: 'Logout',
+    comma: '،',
   },
 };
 export const changeAppLanguage = languageKey => {
