@@ -100,6 +100,7 @@ const styles = StyleSheet.create({
   },
   txtSubInfoValue: {
     flex: 0.7,
+    textAlign: 'left',
     ...FontSize.fontLight14,
     ...PaddingStyle.px16,
     ...PaddingStyle.py16,

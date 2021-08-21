@@ -1,5 +1,6 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {
+  I18nManager,
   Image,
   StyleSheet,
   Text,
@@ -25,7 +26,6 @@ import I18n from '../../i18n/i18n';
 import TitleView from '../../components/titleView';
 import {IMAGES} from '../../assets/images';
 import Menu, {MenuItem} from 'react-native-material-menu';
-import FloatingTextInput from '../../components/floatingTextInput';
 import Checkbox from '../../components/checkBox';
 import {ImagePickerHelper} from '../../const/imagePickerHelper';
 import Button from '../../components/button';
@@ -860,6 +860,7 @@ const CreateAdd = () => {
     const renderMenuTypeItem = title => {
       return (
         <MenuItem
+          textStyle={{...FontSize.fontRegular14}}
           onPress={() => {
             setSelectedType(I18n.t(title));
             hideMeuType();
@@ -924,6 +925,7 @@ const CreateAdd = () => {
     const renderMenuCategoryItem = (title, id) => {
       return (
         <MenuItem
+          textStyle={{...FontSize.fontRegular14}}
           onPress={() => {
             setCategory(title);
             setCategoryId(id);
@@ -971,6 +973,7 @@ const CreateAdd = () => {
             ...FontSize.fontRegular14,
           }}>
           <MenuItem
+            textStyle={{...FontSize.fontRegular14}}
             onPress={() => {
               item.setValue(I18n.t('yes'));
               hideMenuYesOrNo(item.reference);
@@ -978,6 +981,7 @@ const CreateAdd = () => {
             {I18n.t('yes')}
           </MenuItem>
           <MenuItem
+            textStyle={{...FontSize.fontRegular14}}
             onPress={() => {
               item.setValue(I18n.t('no'));
               hideMenuYesOrNo(item.reference);
@@ -1073,6 +1077,7 @@ const CreateAdd = () => {
                   ...FontSize.fontRegular14,
                   ...MarginStyle.mx8,
                   flex: 1,
+                  textAlign: I18nManager.isRTL ? 'right' : 'left',
                 }}
                 multiline={item.multiLine ?? false}
                 placeholderTextColor={COLORS.gray_hint_light}
@@ -1315,7 +1320,7 @@ const styles = StyleSheet.create({
     ...ContainerStyles.containerRow,
     ...MarginStyle.my32,
     ...MarginStyle.mx24,
-    flexDirection:'row-reverse',
+    flexDirection: 'row-reverse',
   },
   headerTitle: {
     ...LayoutGravity.center,

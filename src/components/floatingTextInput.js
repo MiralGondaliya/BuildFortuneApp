@@ -9,7 +9,7 @@ import {
   LayoutGravity,
   PaddingStyle,
 } from '../styles/globalStyles';
-import {Image, Platform, View} from 'react-native';
+import {I18nManager, Image, Platform, View} from 'react-native';
 import {IMAGES} from '../assets/images';
 
 const FloatingTextInput = ({
@@ -87,6 +87,7 @@ const FloatingTextInput = ({
         paddingBottom: 4,
         ...FontSize.fontMedium14,
         paddingLeft: Platform.OS === 'ios' ? 6 : 5,
+        textAlign: I18nManager.isRTL ? 'right' : 'left',
       }}
     />
   );

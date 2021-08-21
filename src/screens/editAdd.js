@@ -1,5 +1,5 @@
 import React, {useEffect, useRef, useState} from 'react';
-import { Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
+import { I18nManager, Image, StyleSheet, Text, TextInput, TouchableOpacity, View } from "react-native";
 import {
   ContainerStyles,
   FontColor,
@@ -918,6 +918,7 @@ const EditAdd = ({route}) => {
     const renderMenuTypeItem = title => {
       return (
         <MenuItem
+          textStyle={{...FontSize.fontRegular14}}
           onPress={() => {
             setSelectedType(I18n.t(title));
             hideMeuType();
@@ -975,6 +976,7 @@ const EditAdd = ({route}) => {
     const renderMenuCategoryItem = (title, id) => {
       return (
         <MenuItem
+          textStyle={{...FontSize.fontRegular14}}
           onPress={() => {
             setCategory(title);
             setCategoryId(id);
@@ -1022,6 +1024,7 @@ const EditAdd = ({route}) => {
             ...FontSize.fontRegular14,
           }}>
           <MenuItem
+            textStyle={{...FontSize.fontRegular14}}
             onPress={() => {
               item.setValue(I18n.t('yes'));
               hideMenuYesOrNo(item.reference);
@@ -1029,6 +1032,7 @@ const EditAdd = ({route}) => {
             {I18n.t('yes')}
           </MenuItem>
           <MenuItem
+            textStyle={{...FontSize.fontRegular14}}
             onPress={() => {
               item.setValue(I18n.t('no'));
               hideMenuYesOrNo(item.reference);
@@ -1123,6 +1127,7 @@ const EditAdd = ({route}) => {
                   ...FontSize.fontRegular14,
                   ...MarginStyle.mx8,
                   flex: 1,
+                  textAlign: I18nManager.isRTL ? 'right' : 'left',
                 }}
                 multiline={item.multiLine ?? false}
                 placeholderTextColor={COLORS.gray_hint_light}

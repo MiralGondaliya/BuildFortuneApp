@@ -79,7 +79,7 @@ const styles = StyleSheet.create({
   title: {
     ...FontColor.colorWhite,
     fontSize: 10,
-    marginTop: 2,
+    marginTop: 4,
     fontFamily: FONTS.light,
   },
 });

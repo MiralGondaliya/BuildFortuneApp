@@ -304,7 +304,9 @@ const Profile = ({navigation}) => {
           ...FontSize.fontRegular14,
         }}>
         {languageList.map(language => (
-          <MenuItem onPress={() => handleOnLanguageSelection(language)}>
+          <MenuItem
+            textStyle={{...FontSize.fontRegular14}}
+            onPress={() => handleOnLanguageSelection(language)}>
             {language.lang_name}
           </MenuItem>
         ))}

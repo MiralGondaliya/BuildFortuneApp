@@ -236,18 +236,21 @@ const Signup = () => {
           ...FontSize.fontRegular14,
         }}>
         <MenuItem
+          textStyle={{...FontSize.fontRegular14}}
           onPress={() => {
             item.setValue(I18n.t('male')), hideGenderMenu();
           }}>
           {I18n.t('male')}
         </MenuItem>
         <MenuItem
+          textStyle={{...FontSize.fontRegular14}}
           onPress={() => {
             item.setValue(I18n.t('female')), hideGenderMenu();
           }}>
           {I18n.t('female')}
         </MenuItem>
         <MenuItem
+          textStyle={{...FontSize.fontRegular14}}
           onPress={() => {
             item.setValue(I18n.t('other')), hideGenderMenu();
           }}>
