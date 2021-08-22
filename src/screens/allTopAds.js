@@ -43,7 +43,11 @@ const AllTopAds = () => {
             data={[1, 1, 1, 1, 1, 1, 1]}
             ListHeaderComponent={() => (
               <View style={MarginStyle.mT16}>
-                <TitleView title={I18n.t('top')} subTitle={I18n.t('ads')} small={true} />
+                <TitleView
+                  title={I18n.t('top')}
+                  subTitle={I18n.t('ads')}
+                  small={true}
+                />
               </View>
             )}
             renderItem={({item, index}) => (

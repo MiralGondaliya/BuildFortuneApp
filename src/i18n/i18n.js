@@ -5,7 +5,8 @@ I18n.fallBacks = true;
 I18n.translations = {
   en: {
     welcome: 'Welcome',
-    welcomeMessage: 'Welcome to Build Fortune, A platform for buying, selling businesses and business shares.',
+    welcomeMessage:
+      'Welcome to Build Fortune, A platform for buying, selling businesses and business shares.',
     getStarted: 'Get Started >',
     signin: 'Signin',
     signInToContinue: 'Sign in to continue',
@@ -248,6 +249,7 @@ I18n.translations = {
     squareMeters: 'Square Meters',
     account: 'Account',
     comma: ',',
+    adType: 'ad type',
   },
   ar: {
     welcome: 'مرحبا',
@@ -319,7 +321,7 @@ I18n.translations = {
     ad: 'إعلان',
     select: 'اختيار',
     category: 'الفئة',
-    main: 'الرئيسي',
+    main: 'الإعلان',
     information: 'معلومات',
     selectCategory: 'اختر الفئة',
     title: 'العنوان',
@@ -365,7 +367,7 @@ I18n.translations = {
     createAdCheckBox:
       'عرض بيانات الاتصال للمشتركين فقط؟ قد يقلص هذا الاختيار من فرص التواصل معك.',
     continue: 'استمرار',
-    my: 'الخاصة بي',
+    my: 'خاصتي',
     notifications: 'التنبيهات',
     today: 'اليوم',
     clearAll: 'مسح الكل',
@@ -403,7 +405,8 @@ I18n.translations = {
     pushAlert: 'التنبيه الفوري',
     getPushNotificationOnAlert: 'الحصول على التنبيهات الفورية من التطبيق',
     smsAlert: 'تنبيهات الرسائل القصيرة',
-    getSmsNotificationOnAlert: 'الحصول على التنبيهات الفورية عبر الرسائل القصسرة',
+    getSmsNotificationOnAlert:
+      'الحصول على التنبيهات الفورية عبر الرسائل القصسرة',
     skip: 'تخطي',
     validMessageEmptyEmail: 'الرجاء كتابة عنوان بريدك الإلكتروني',
     validMessageEmptyPassword: 'الرجاء كتابة كلمة السر',
@@ -430,7 +433,7 @@ I18n.translations = {
     includeAFasabilityStudy: 'هل لديك دراسة جدوى؟',
     haveBrandingStrayegy: 'هل لديك خطة هوية المشروع؟',
     haveMarketing: 'هل لديك خطة تسويق؟',
-    additional: 'إضافي',
+    additional: 'إضافية',
     investmentPercentageOpt: 'النسبة المئوية للمستثمر (اختياري)',
     hintPercentage: 'النسبة المئوية',
     investor: 'المستثمر',
@@ -486,6 +489,11 @@ I18n.translations = {
     squareMeters: 'متر مربع',
     account: 'حسابي',
     comma: '،',
+    investorNationalityHintArabic: 'جنسية المستثمر بالعربي',
+    investorFieldOfExpHintArabic: 'مجال خبرة المستثمر بالعربي',
+    investorCharacteristicsHintArabic: 'صفات المستثمر بالعربي',
+    adType: 'نوع الإعلان',
+    establishmentYearOpt: 'سنة التأسيس )اختياري(',
   },
 };
 export const changeAppLanguage = languageKey => {

@@ -79,7 +79,10 @@ const Home = ({navigation}) => {
       return (
         <View style={styles.headerContainer}>
           <View>
-            <Text style={styles.txtHello}>{I18n.t('hello')}{I18n.t('comma')}</Text>
+            <Text style={styles.txtHello}>
+              {I18n.t('hello')}
+              {I18n.t('comma')}
+            </Text>
             <Text style={styles.txtUserName}>{userName}</Text>
           </View>
           <Image

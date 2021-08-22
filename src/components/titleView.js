@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {
   I18nManager,
   StyleSheet,
@@ -26,18 +26,24 @@ const TitleView = ({
   containerStyle,
   onPressViewAll,
   actionText,
+  reverseTitle = false,
 }) => {
   //const {t} = useTranslation();
   return (
     <View style={[styles.container, containerStyle && containerStyle]}>
-      {I18nManager.isRTL ? (
-        <Text style={[styles.subTitle, small && styles.titleSmall]}>
+      {reverseTitle ? (
+        <Text
+          style={[
+            styles.subTitle,
+            small && styles.titleSmall,
+            {marginEnd: 8},
+          ]}>
           {subTitle}
         </Text>
       ) : (
         <Text style={[styles.title, small && styles.titleSmall]}>{title}</Text>
       )}
-      {I18nManager.isRTL ? (
+      {reverseTitle ? (
         <Text style={[styles.title, small && styles.titleSmall]}>{title}</Text>
       ) : (
         <Text style={[styles.subTitle, small && styles.titleSmall]}>
@@ -74,7 +80,7 @@ const styles = StyleSheet.create({
     fontSize: 26,
     fontFamily: FONTS.medium,
     lineHeight: 40,
-    marginStart: I18nManager.isRTL ? 8 : 0,
+    marginEnd: I18nManager.isRTL ? 8 : 0,
   },
   titleSmall: {
     fontSize: 20,

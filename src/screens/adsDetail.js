@@ -8,6 +8,7 @@ import {
   Text,
   TouchableOpacity,
   View,
+  I18nManager,
 } from 'react-native';
 import {
   ContainerStyles,
@@ -48,6 +49,7 @@ const AdsDetail = ({route}) => {
     false,
   );
   const [postInfo, setPostInfo] = useState(null);
+  const [returnUrl, setReturnUrl] = useState(null);
   const [detailsList, setDetailsList] = useState([]);
   const [buttonShow, setButtonShow] = useState(false);
   const [contactInfo, setContactInfo] = useState(null);
@@ -63,6 +65,7 @@ const AdsDetail = ({route}) => {
         if (data) {
           setPostInfo(data.post_info);
           setDetailsList(data.details_list);
+          setReturnUrl(data.return_url);
           setButtonShow(isMyAdsDetail ? false : data?.button_show === 1);
           console.log(JSON.stringify(data));
         } else {
@@ -76,7 +79,13 @@ const AdsDetail = ({route}) => {
   const handleOnViewContactDetail = async () => {
     let isLogin = await isLogIn();
     if (isLogin) {
-      apiCallPostContactDetail();
+      // apiCallPostContactDetail();
+      NavigationService.navigate('PaymentWebview', {
+        returnUrl: returnUrl,
+        onBack: () => {
+          apiCallGetPostDetail();
+        },
+      });
     } else {
       NavigationService.navigate('Login');
     }
@@ -109,10 +118,17 @@ const AdsDetail = ({route}) => {
     return (
       <View style={styles.headerContainer}>
         <BackButton light={true} />
-        <Text style={styles.headerTitle}>
-          {I18n.t('business')}{' '}
-          <Text style={styles.headerTitleBold}>{I18n.t('details')}</Text>
-        </Text>
+        {I18nManager.isRTL ? (
+          <Text style={styles.headerTitle}>
+            {I18n.t('details')}{' '}
+            <Text style={styles.headerTitleBold}>{I18n.t('business')}</Text>
+          </Text>
+        ) : (
+          <Text style={styles.headerTitle}>
+            {I18n.t('business')}{' '}
+            <Text style={styles.headerTitleBold}>{I18n.t('details')}</Text>
+          </Text>
+        )}
         <TouchableOpacity
           style={GlobalStyles.navIconContainer}
           onPress={() => {

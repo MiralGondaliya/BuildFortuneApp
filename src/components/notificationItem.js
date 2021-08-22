@@ -27,11 +27,11 @@ const NotificationItem = ({image, message, time}) => {
         <Text style={styles.notificationTitle}>{message}</Text>
         {/*<Text style={styles.notificationTime}>{time}</Text>*/}
       </View>
-      <Image
-        style={styles.nextIcon}
-        source={IMAGES.next_grey}
-        resizeMode={'contain'}
-      />
+      {/*<Image*/}
+      {/*  style={styles.nextIcon}*/}
+      {/*  source={IMAGES.next_grey}*/}
+      {/*  resizeMode={'contain'}*/}
+      {/*/>*/}
     </TouchableOpacity>
   );
 };

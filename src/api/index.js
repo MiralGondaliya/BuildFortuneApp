@@ -7,7 +7,8 @@ import {isLogIn, signOut} from '../const/utils';
 import {getLanguages} from 'react-native-i18n';
 
 // const BASE_URL = 'http://192.168.1.3:8000/api/';
-const BASE_URL = 'http://pedra.todaystechnology.in/api/';
+// const BASE_URL = 'http://pedra.todaystechnology.in/api/';
+const BASE_URL = 'https://bfs.webymaster.com/api/';
 
 export const auth = async () => {
   // {

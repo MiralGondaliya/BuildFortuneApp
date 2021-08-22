@@ -553,7 +553,8 @@ const CreateAdd = () => {
       setValue: value => {
         setPhoneNumber(filterStringByNumber(value));
       },
-      leftComponent: renderCountryCodePicker(false),
+      leftComponent: !I18nManager.isRTL ? renderCountryCodePicker(false) : null,
+      rightComponent: I18nManager.isRTL ? renderCountryCodePicker(false) : null,
       validation: () => {
         let isValid = !!phoneNumber;
         if (!isValid) {
@@ -571,7 +572,8 @@ const CreateAdd = () => {
       setValue: value => {
         setWhatsAppNumber(filterStringByNumber(value));
       },
-      leftComponent: renderCountryCodePicker(true),
+      leftComponent: !I18nManager.isRTL ? renderCountryCodePicker(true) : null,
+      rightComponent: I18nManager.isRTL ? renderCountryCodePicker(true) : null,
       validation: () => {
         return true;
       },
@@ -874,8 +876,8 @@ const CreateAdd = () => {
       <View style={styles.selectCategoryContainer}>
         <TitleView
           title={I18n.t('select')}
-          subTitle={I18n.t('type')}
-          small={true}
+          subTitle={I18n.t('adType')}
+          big={true}
         />
         <TouchableOpacity
           onPress={() => showMenuType()}
@@ -905,7 +907,7 @@ const CreateAdd = () => {
     );
   };
 
-  const renderForm = (form, title) => {
+  const renderForm = (form, title, showTitleInReverse) => {
     const showTitle = (item, index) => {
       if (index === 0) {
         return true;
@@ -1089,6 +1091,7 @@ const CreateAdd = () => {
                 keyboardType={item.keyboardType}
                 placeholder={item.placeholder}
               />
+              {item?.rightComponent && item.rightComponent}
               {item.rightIcon && (
                 <Image
                   source={item.rightIcon}
@@ -1125,6 +1128,7 @@ const CreateAdd = () => {
           title={I18n.t(title)}
           subTitle={I18n.t('information')}
           small={true}
+          reverseTitle={showTitleInReverse}
         />
         <View style={styles.roundedBg}>
           {form.map((item, index) => renderFormItem(item, index))}
@@ -1254,18 +1258,18 @@ const CreateAdd = () => {
           {renderSelectCategory()}
           {selectType ? (
             <View>
-              {renderForm(FILL_INFO, 'main')}
-              {renderForm(CONTACT_INFO, 'contact')}
+              {renderForm(FILL_INFO, 'main', I18nManager.isRTL)}
+              {renderForm(CONTACT_INFO, 'contact', false)}
               {selectType === I18n.t('sellMyBusiness')
-                ? renderForm(LOCAL_INFO, 'local')
+                ? renderForm(LOCAL_INFO, 'local', false)
                 : null}
               {selectType === I18n.t('sellMyBusinessShares')
-                ? renderForm(INVESTOR_INFO, 'investor')
+                ? renderForm(INVESTOR_INFO, 'investor', false)
                 : null}
 
               {selectType !== I18n.t('sellMyBusinessIdea')
-                ? renderForm(SOCIAL_INFO, 'social')
-                : renderForm(ADDITIONAL_INFO, 'additional')}
+                ? renderForm(SOCIAL_INFO, 'social', false)
+                : renderForm(ADDITIONAL_INFO, 'additional', I18nManager.isRTL)}
               <View style={styles.spaceH16} />
               <Button
                 title={I18n.t('continue')}
@@ -1325,7 +1329,6 @@ const styles = StyleSheet.create({
     ...ContainerStyles.containerRow,
     ...MarginStyle.my32,
     ...MarginStyle.mx24,
-    flexDirection: 'row-reverse',
   },
   headerTitle: {
     ...LayoutGravity.center,
