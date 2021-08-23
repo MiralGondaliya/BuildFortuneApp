@@ -97,9 +97,9 @@ const PrivacySetting = () => {
       <View>
         <View style={styles.headerContainer}>
           <BackButton light={true} />
-          <Text style={styles.headerTitle}>{I18n.t('privacy')} </Text>
+          <Text style={styles.headerTitle}>{I18n.t('privacySetting')} </Text>
         </View>
-        <Text style={styles.headerTitleLight}>{I18n.t('settings')} </Text>
+        {/*<Text style={styles.headerTitleLight}>{I18n.t('settings')} </Text>*/}
       </View>
     );
   };
@@ -113,8 +113,14 @@ const PrivacySetting = () => {
             GlobalStyles.footerContainerLightSmallRadius,
             {...PaddingStyle.p16},
           ]}>
-          <TitleView title={I18n.t('password')} subTitle={I18n.t('reset')} small={true} />
-          <Text style={styles.txtMessage}>{I18n.t('resetPasswordMessage')}</Text>
+          <TitleView
+            title={I18n.t('resetPassword')}
+            // subTitle={I18n.t('reset')}
+            small={true}
+          />
+          <Text style={styles.txtMessage}>
+            {I18n.t('resetPasswordMessage')}
+          </Text>
           <View style={PaddingStyle.p16}>
             {inputs.map((item, index) => (
               <View style={(MarginStyle.mx16, PaddingStyle.py8)}>
@@ -151,6 +157,8 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     ...ContainerStyles.containerRow,
+    ...PaddingStyle.pB32,
+    ...PaddingStyle.pT16,
   },
   headerTitle: {
     ...LayoutGravity.center,

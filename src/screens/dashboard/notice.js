@@ -104,8 +104,8 @@ const Notice = () => {
     return (
       <View>
         <View style={styles.headerContainer}>
-          <Text style={styles.headerTitle}>{I18n.t('my')} </Text>
-          <Text style={styles.headerTitleLight}>{I18n.t('notifications')} </Text>
+          <Text style={styles.headerTitle}>{I18n.t('myNotifications')} </Text>
+          {/*<Text style={styles.headerTitleLight}>{I18n.t('notifications')} </Text>*/}
         </View>
       </View>
     );
@@ -117,8 +117,8 @@ const Notice = () => {
         {!showEmptyView && notificationData.length > 0 && (
           <TitleView
             small={true}
-            title={I18n.t('all')}
-            subTitle={I18n.t('notifications')}
+            title={I18n.t('allNotifications')}
+            // subTitle={I18n.t('notifications')}
             onPressViewAll={() => {
               apiCallRemoveNotification();
             }}

@@ -901,9 +901,9 @@ const EditAdd = ({route}) => {
       <View>
         <View style={styles.headerContainer}>
           <BackButton light={true} />
-          <Text style={styles.headerTitle}>{I18n.t('edit')} </Text>
+          <Text style={styles.headerTitle}>{I18n.t('editAds')} </Text>
         </View>
-        <Text style={styles.headerTitleLight}>{I18n.t('ads')} </Text>
+        {/*<Text style={styles.headerTitleLight}>{I18n.t('ads')} </Text>*/}
       </View>
     );
   };
@@ -946,8 +946,8 @@ const EditAdd = ({route}) => {
     return (
       <View style={styles.selectCategoryContainer}>
         <TitleView
-          title={I18n.t('business')}
-          subTitle={I18n.t('type')}
+          title={I18n.t('businessType')}
+          // subTitle={I18n.t('type')}
           small={true}
         />
         <View style={[styles.roundedBg, ContainerStyles.containerRow]}>
@@ -1142,6 +1142,7 @@ const EditAdd = ({route}) => {
                 style={{
                   ...FontSize.fontRegular14,
                   ...MarginStyle.mx8,
+                  color: COLORS.black,
                   flex: 1,
                   textAlign: I18nManager.isRTL ? 'right' : 'left',
                 }}
@@ -1189,7 +1190,7 @@ const EditAdd = ({route}) => {
       <View style={styles.fillInfoContainer}>
         <TitleView
           title={I18n.t(title)}
-          subTitle={I18n.t('information')}
+          // subTitle={I18n.t('information')}
           small={true}
           reverseTitle={showTitleInReverse}
         />
@@ -1320,17 +1321,21 @@ const EditAdd = ({route}) => {
           {renderSelectCategory()}
           {selectType ? (
             <View>
-              {renderForm(FILL_INFO, 'main', I18nManager.isRTL)}
-              {renderForm(CONTACT_INFO, 'contact', false)}
+              {renderForm(FILL_INFO, 'mainInformation', I18nManager.isRTL)}
+              {renderForm(CONTACT_INFO, 'contactInformation', false)}
               {selectType === I18n.t('sellMyBusiness')
-                ? renderForm(LOCAL_INFO, 'local', false)
+                ? renderForm(LOCAL_INFO, 'locationInformation', false)
                 : null}
               {selectType === I18n.t('sellMyBusinessShares')
-                ? renderForm(INVESTOR_INFO, 'investor', false)
+                ? renderForm(INVESTOR_INFO, 'investorInformation', false)
                 : null}
               {selectType !== I18n.t('sellMyBusinessIdea')
-                ? renderForm(SOCIAL_INFO, 'social', false)
-                : renderForm(ADDITIONAL_INFO, 'additional', I18nManager.isRTL)}
+                ? renderForm(SOCIAL_INFO, 'socialInformation', false)
+                : renderForm(
+                    ADDITIONAL_INFO,
+                    'additionalInformation',
+                    I18nManager.isRTL,
+                  )}
               <View style={styles.spaceH16} />
               <Button
                 title={I18n.t('continue')}
@@ -1388,6 +1393,8 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     ...ContainerStyles.containerRow,
+    ...PaddingStyle.pT16,
+    ...PaddingStyle.pB32,
   },
   headerTitle: {
     ...LayoutGravity.center,

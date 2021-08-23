@@ -116,7 +116,10 @@ const Search = () => {
   const renderTrendingAds = () => {
     return (
       <View style={{paddingTop: 16}}>
-        <TitleView title={I18n.t('trending')} subTitle={I18n.t('ads')} />
+        <TitleView
+          title={I18n.t('trendingAds')}
+          // subTitle={I18n.t('ads')}
+        />
         <FlatList
           data={trendingAds}
           ListFooterComponent={() =>

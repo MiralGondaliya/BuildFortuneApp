@@ -55,7 +55,12 @@ const AdsInformation = ({title, subTitle, information}) => {
   };
   return (
     <View style={styles.container}>
-      <TitleView title={title} subTitle={subTitle} small={true} />
+      <TitleView
+        title={title}
+        subTitle={subTitle}
+        small={true}
+        reverseTitle={I18nManager.isRTL}
+      />
       <View style={styles.infoContainer}>
         <FlatList
           data={information}

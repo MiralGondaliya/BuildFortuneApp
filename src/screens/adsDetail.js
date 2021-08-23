@@ -50,6 +50,8 @@ const AdsDetail = ({route}) => {
   );
   const [postInfo, setPostInfo] = useState(null);
   const [returnUrl, setReturnUrl] = useState(null);
+  const [successUrl, setSuccessUrl] = useState('');
+  const [failureUrl, setFailureUrl] = useState('');
   const [detailsList, setDetailsList] = useState([]);
   const [buttonShow, setButtonShow] = useState(false);
   const [contactInfo, setContactInfo] = useState(null);
@@ -66,6 +68,8 @@ const AdsDetail = ({route}) => {
           setPostInfo(data.post_info);
           setDetailsList(data.details_list);
           setReturnUrl(data.return_url);
+          setSuccessUrl(data.callback_success_url);
+          setFailureUrl(data.callback_failure_url);
           setButtonShow(isMyAdsDetail ? false : data?.button_show === 1);
           console.log(JSON.stringify(data));
         } else {
@@ -82,6 +86,8 @@ const AdsDetail = ({route}) => {
       // apiCallPostContactDetail();
       NavigationService.navigate('PaymentWebview', {
         returnUrl: returnUrl,
+        successUrl: successUrl,
+        failureUrl: failureUrl,
         onBack: () => {
           apiCallGetPostDetail();
         },
@@ -118,17 +124,21 @@ const AdsDetail = ({route}) => {
     return (
       <View style={styles.headerContainer}>
         <BackButton light={true} />
-        {I18nManager.isRTL ? (
-          <Text style={styles.headerTitle}>
-            {I18n.t('details')}{' '}
-            <Text style={styles.headerTitleBold}>{I18n.t('business')}</Text>
-          </Text>
-        ) : (
-          <Text style={styles.headerTitle}>
-            {I18n.t('business')}{' '}
-            <Text style={styles.headerTitleBold}>{I18n.t('details')}</Text>
-          </Text>
-        )}
+        <Text style={styles.headerTitle}>
+          {I18n.t('businessDetails')}
+          {/*<Text style={styles.headerTitleBold}>{I18n.t('business')}</Text>*/}
+        </Text>
+        {/*{I18nManager.isRTL ? (*/}
+        {/*  <Text style={styles.headerTitle}>*/}
+        {/*    {I18n.t('details')}{' '}*/}
+        {/*    <Text style={styles.headerTitleBold}>{I18n.t('business')}</Text>*/}
+        {/*  </Text>*/}
+        {/*) : (*/}
+        {/*  <Text style={styles.headerTitle}>*/}
+        {/*    {I18n.t('business')}{' '}*/}
+        {/*    <Text style={styles.headerTitleBold}>{I18n.t('details')}</Text>*/}
+        {/*  </Text>*/}
+        {/*)}*/}
         <TouchableOpacity
           style={GlobalStyles.navIconContainer}
           onPress={() => {
@@ -204,7 +214,6 @@ const AdsDetail = ({route}) => {
                 item.information.length > 0 && (
                   <AdsInformation
                     title={item.key}
-                    subTitle={I18n.t('information')}
                     information={item.information}
                   />
                 )
@@ -249,6 +258,7 @@ const styles = StyleSheet.create({
     flex: 1,
     fontSize: 20,
     fontFamily: FONTS.light,
+    marginEnd: -8,
   },
   headerTitleBold: {
     fontFamily: FONTS.medium,

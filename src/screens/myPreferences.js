@@ -58,16 +58,24 @@ const MyPreferences = () => {
     apiCallSaveUserSetting();
   }, [isNotification, isSmsAlert, selectedLanguage]);
 
+  const getLanguage = async () => {
+    let mLanguage = await Storage.getData(LANGUAGE);
+    if (mLanguage) {
+      mLanguage = JSON.parse(mLanguage);
+    }
+    return mLanguage;
+  };
+
   const apiCallGetUserSetting = () => {
     apiCall(
       getUserSetting(),
-      (data, message) => {
+      async (data, message) => {
         if (data) {
           console.log(data);
           let settings = data.settings;
           setIsNotification(settings.push_alert === 1);
           setIsSmsAlert(settings.sms_alert === 1);
-          setSelectedLanguage(settings.language_id === 1 ? 'English' : 'عربى');
+          setSelectedLanguage(settings.language_id == 1 ? 'English' : 'عربى');
         }
       },
       true,
@@ -112,9 +120,9 @@ const MyPreferences = () => {
       <View>
         <View style={styles.headerContainer}>
           <BackButton light={true} />
-          <Text style={styles.headerTitle}>{I18n.t('my')} </Text>
+          <Text style={styles.headerTitle}>{I18n.t('myPreferences')} </Text>
         </View>
-        <Text style={styles.headerTitleLight}>{I18n.t('preferences')} </Text>
+        {/*<Text style={styles.headerTitleLight}>{I18n.t('preferences')} </Text>*/}
       </View>
     );
   };
@@ -125,14 +133,6 @@ const MyPreferences = () => {
 
   const showMenuLanguage = () => {
     refMenuLanguage.current.show();
-  };
-
-  const getLanguage = async () => {
-    let mLanguage = await Storage.getData(LANGUAGE);
-    if (mLanguage) {
-      mLanguage = JSON.parse(mLanguage);
-    }
-    return mLanguage;
   };
 
   const handleOnLanguageSelection = async language => {
@@ -297,6 +297,8 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     ...ContainerStyles.containerRow,
+    ...PaddingStyle.pB32,
+    ...PaddingStyle.pT16
   },
   headerTitle: {
     ...LayoutGravity.center,

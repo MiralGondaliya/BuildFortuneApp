@@ -140,8 +140,8 @@ const Home = ({navigation}) => {
     return (
       <View>
         <TitleView
-          title={I18n.t('top')}
-          subTitle={I18n.t('ads')}
+          title={I18n.t('topAds')}
+          reverseTitle={true}
           big={true}
           onPressViewAll={() => {
             NavigationService.navigate('CategoryAds', {

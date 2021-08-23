@@ -14,6 +14,7 @@ import {
   Gravity,
   LayoutGravity,
   MarginStyle,
+  PaddingStyle,
 } from '../styles/globalStyles';
 import {COLORS} from '../styles/colors';
 import {FONTS} from '../styles/fonts';
@@ -86,9 +87,9 @@ const MyAds = () => {
       <View>
         <View style={styles.headerContainer}>
           <BackButton light={true} />
-          <Text style={styles.headerTitle}>{I18n.t('my')} </Text>
+          <Text style={styles.headerTitle}>{I18n.t('myAds')} </Text>
         </View>
-        <Text style={styles.headerTitleLight}>{I18n.t('ads')} </Text>
+        {/*<Text style={styles.headerTitleLight}>{I18n.t('ads')} </Text>*/}
       </View>
     );
   };
@@ -158,6 +159,8 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     ...ContainerStyles.containerRow,
+    ...PaddingStyle.pB32,
+    ...PaddingStyle.pT16,
   },
   headerTitle: {
     ...LayoutGravity.center,

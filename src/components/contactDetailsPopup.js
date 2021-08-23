@@ -48,7 +48,6 @@ const ContactDetailsPopup = ({showModal, hideModal, data}) => {
             ]}>
             <AdsInformation
               title={data.key}
-              subTitle={I18n.t('information')}
               information={data.information}
             />
           </View>

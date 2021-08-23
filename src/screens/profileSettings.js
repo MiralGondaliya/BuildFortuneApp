@@ -292,9 +292,9 @@ const ProfileSettings = () => {
       <View>
         <View style={styles.headerContainer}>
           <BackButton light={true} />
-          <Text style={styles.headerTitle}>{I18n.t('profile')} </Text>
+          <Text style={styles.headerTitle}>{I18n.t('profileSetting')} </Text>
         </View>
-        <Text style={styles.headerTitleLight}>{I18n.t('settings')} </Text>
+        {/*<Text style={styles.headerTitleLight}>{I18n.t('settings')} </Text>*/}
       </View>
     );
   };
@@ -430,6 +430,8 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     ...ContainerStyles.containerRow,
+    ...PaddingStyle.pB32,
+    ...PaddingStyle.pT16,
   },
   headerTitle: {
     ...LayoutGravity.center,

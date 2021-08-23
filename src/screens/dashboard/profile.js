@@ -246,20 +246,23 @@ const Profile = ({navigation}) => {
     return (
       <View style={styles.headerContainer}>
         <View style={ContainerStyles.containerRow}>
-          {I18nManager.isRTL ? (
-            <Text style={styles.headerTitleLight}>
-              {isLogin ? I18n.t('profile') : I18n.t('settings')}
-            </Text>
-          ) : (
-            <Text style={styles.headerTitle}>{I18n.t('my')}</Text>
-          )}
-          {I18nManager.isRTL ? (
-            <Text style={styles.headerTitle}>{I18n.t('my')}</Text>
-          ) : (
-            <Text style={styles.headerTitleLight}>
-              {isLogin ? I18n.t('profile') : I18n.t('settings')}
-            </Text>
-          )}
+          {/*{I18nManager.isRTL ? (*/}
+          {/*  <Text style={styles.headerTitleLight}>*/}
+          {/*    {isLogin ? I18n.t('profile') : I18n.t('settings')}*/}
+          {/*  </Text>*/}
+          {/*) : (*/}
+          {/*  <Text style={styles.headerTitle}>{I18n.t('my')}</Text>*/}
+          {/*)}*/}
+          {/*{I18nManager.isRTL ? (*/}
+          {/*  <Text style={styles.headerTitle}>{I18n.t('my')}</Text>*/}
+          {/*) : (*/}
+          {/*  <Text style={styles.headerTitleLight}>*/}
+          {/*    {isLogin ? I18n.t('profile') : I18n.t('settings')}*/}
+          {/*  </Text>*/}
+          {/*)}*/}
+          <Text style={styles.headerTitleLight}>
+            {isLogin ? I18n.t('myProfile') : I18n.t('mySettings')}
+          </Text>
         </View>
         {userProfile && (
           <Image style={styles.profilePic} source={{uri: userProfile}} />

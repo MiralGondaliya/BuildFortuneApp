@@ -842,8 +842,8 @@ const CreateAdd = () => {
       <View>
         <View style={styles.headerContainer}>
           <Text style={styles.headerTitle}>
-            {I18n.t('create')}{' '}
-            <Text style={styles.headerTitleLight}>{I18n.t('ad')} </Text>
+            {I18n.t('createAdd')}{' '}
+            {/*<Text style={styles.headerTitleLight}>{I18n.t('ad')} </Text>*/}
           </Text>
         </View>
       </View>
@@ -875,8 +875,8 @@ const CreateAdd = () => {
     return (
       <View style={styles.selectCategoryContainer}>
         <TitleView
-          title={I18n.t('select')}
-          subTitle={I18n.t('adType')}
+          title={I18n.t('selectAdType')}
+          // subTitle={I18n.t('adType')}
           big={true}
         />
         <TouchableOpacity
@@ -1080,6 +1080,7 @@ const CreateAdd = () => {
                   ...FontSize.fontRegular14,
                   ...MarginStyle.mx8,
                   flex: 1,
+                  color: COLORS.black,
                   textAlign: I18nManager.isRTL ? 'right' : 'left',
                 }}
                 multiline={item.multiLine ?? false}
@@ -1126,7 +1127,6 @@ const CreateAdd = () => {
       <View style={styles.fillInfoContainer}>
         <TitleView
           title={I18n.t(title)}
-          subTitle={I18n.t('information')}
           small={true}
           reverseTitle={showTitleInReverse}
         />
@@ -1258,18 +1258,22 @@ const CreateAdd = () => {
           {renderSelectCategory()}
           {selectType ? (
             <View>
-              {renderForm(FILL_INFO, 'main', I18nManager.isRTL)}
-              {renderForm(CONTACT_INFO, 'contact', false)}
+              {renderForm(FILL_INFO, 'mainInformation', I18nManager.isRTL)}
+              {renderForm(CONTACT_INFO, 'contactInformation', false)}
               {selectType === I18n.t('sellMyBusiness')
-                ? renderForm(LOCAL_INFO, 'local', false)
+                ? renderForm(LOCAL_INFO, 'locationInformation', false)
                 : null}
               {selectType === I18n.t('sellMyBusinessShares')
-                ? renderForm(INVESTOR_INFO, 'investor', false)
+                ? renderForm(INVESTOR_INFO, 'investorInformation', false)
                 : null}
 
               {selectType !== I18n.t('sellMyBusinessIdea')
-                ? renderForm(SOCIAL_INFO, 'social', false)
-                : renderForm(ADDITIONAL_INFO, 'additional', I18nManager.isRTL)}
+                ? renderForm(SOCIAL_INFO, 'socialInformation', false)
+                : renderForm(
+                    ADDITIONAL_INFO,
+                    'additionalInformation',
+                    I18nManager.isRTL,
+                  )}
               <View style={styles.spaceH16} />
               <Button
                 title={I18n.t('continue')}

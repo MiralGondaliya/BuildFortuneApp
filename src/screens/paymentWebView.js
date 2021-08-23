@@ -1,6 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import Screen from '../components/screen';
-import {ActivityIndicator, StyleSheet, View} from 'react-native';
+import {ActivityIndicator, BackHandler, StyleSheet, View} from 'react-native';
 import {
   ContainerStyles,
   FontColor,
@@ -16,14 +16,36 @@ import {FONTS} from '../styles/fonts';
 import WebView from 'react-native-webview';
 import {getNavigationParams} from '../const/utils';
 import BackButton from '../components/backButton';
+import {showErrorMessage} from '../const/flashMessage';
+import I18n from '../i18n/i18n';
 
 const PaymentWebview = ({route, navigation}) => {
   //const {t} = useTranslation();
   const url = getNavigationParams(route.params, 'returnUrl', '');
+  const successUrl = getNavigationParams(route.params, 'successUrl', '');
+  const failureUrl = getNavigationParams(route.params, 'failureUrl', '');
   const onBack = getNavigationParams(route.params, 'onBack', '');
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {}, []);
+
+  const onBackHandling = () => {
+    onBack();
+    navigation.goBack();
+  };
+
+  useEffect(() => {
+    const backAction = () => {
+      onBack();
+    };
+
+    const backHandler = BackHandler.addEventListener(
+      'hardwareBackPress',
+      backAction,
+    );
+
+    return () => backHandler.remove();
+  }, []);
 
   const renderHeader = () => {
     return (
@@ -32,8 +54,7 @@ const PaymentWebview = ({route, navigation}) => {
           <BackButton
             light={true}
             onBackPress={() => {
-              onBack();
-              navigation.goBack();
+              onBackHandling();
             }}
           />
         </View>
@@ -51,7 +72,28 @@ const PaymentWebview = ({route, navigation}) => {
             {...PaddingStyle.pB24},
           ]}>
           {url ? (
-            <WebView source={{uri: url}} onLoad={() => setIsLoading(false)} />
+            <WebView
+              source={{uri: url}}
+              onLoad={() => {
+                setIsLoading(false);
+              }}
+              onLoadEnd={data => {
+                let endpoint = data.nativeEvent.url;
+                console.log(endpoint);
+                if (endpoint.includes(successUrl)) {
+                  showErrorMessage(I18n.t('paymentSuccessFul'));
+                  setTimeout(() => {
+                    onBackHandling();
+                  }, 1000);
+                }
+                if (endpoint.includes(failureUrl)) {
+                  showErrorMessage(I18n.t('paymentFailed'));
+                  setTimeout(() => {
+                    onBackHandling();
+                  }, 1000);
+                }
+              }}
+            />
           ) : null}
           {isLoading ? (
             <ActivityIndicator

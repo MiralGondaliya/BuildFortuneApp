@@ -64,10 +64,10 @@ const Signup = () => {
     let isCountryCode = !!countryCode;
     let isPhone = !!phone;
     let isFullName = !!fullName;
-    let isEmail = !!email && isEmailValid(email);
+    let isEmail = !!email; //&& isEmailValid(email);
     let isPassword = !!password;
     let isConfirmPassword = !!confirmPassword;
-    let isPasswordMatch = password === confirmPassword;
+    // let isPasswordMatch = password === confirmPassword;
     let isGender = Platform.OS === 'ios' ? true : !!gender;
     let isNationality = !!nationality;
     let isDateOfBirth = !!dateOfBirth;
@@ -77,7 +77,7 @@ const Signup = () => {
         isFullName &&
         isEmail &&
         isPassword &&
-        isPasswordMatch &&
+        // isPasswordMatch &&
         isConfirmPassword &&
         isGender &&
         isNationality &&
@@ -193,6 +193,18 @@ const Signup = () => {
   };
 
   const handleOnSignUpClick = () => {
+    let isEmail = isEmailValid(email);
+    let isPasswordMatch = password === confirmPassword;
+
+    if (!isEmail) {
+      showErrorMessage(I18n.t('validMessageValidEmail'));
+      return;
+    }
+    if (!isPasswordMatch) {
+      showErrorMessage(I18n.t('passwordDoseNotMatch'));
+      return;
+    }
+
     apiCall(
       signup(
         countryCode,
