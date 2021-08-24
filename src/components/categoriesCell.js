@@ -57,7 +57,7 @@ const styles = StyleSheet.create({
   txtCategory: {
     ...FontColor.colorPrimary,
     ...FontSize.fontRegular14,
-    paddingHorizontal: 2,
+    paddingHorizontal: 3,
     textAlign: 'center',
     marginTop: 16,
     lineHeight: 15,
