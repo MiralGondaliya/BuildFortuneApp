@@ -77,7 +77,7 @@ const SelectLanguage = () => {
     if (
       preSelectedLanguage?.lang_short_name !== selectedLanguage.lang_short_name
     ) {
-      apiCall(
+      await apiCall(
         selectLanguage(selectedLanguage.lang_id),
         (data, message) => {
           console.log(message);

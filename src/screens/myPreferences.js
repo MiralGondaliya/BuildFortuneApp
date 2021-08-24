@@ -48,6 +48,7 @@ const MyPreferences = () => {
   const [isSmsAlert, setIsSmsAlert] = useState(false);
   const [selectedLanguage, setSelectedLanguage] = useState('');
   const [languageList, setLanguageList] = useState([]);
+  const [shouldUpdate, setShouldUpdate] = useState(false);
 
   useEffect(() => {
     apiCallGetUserSetting();
@@ -55,8 +56,10 @@ const MyPreferences = () => {
   }, []);
 
   useEffect(() => {
-    apiCallSaveUserSetting();
-  }, [isNotification, isSmsAlert, selectedLanguage]);
+    if (shouldUpdate) {
+      apiCallSaveUserSetting();
+    }
+  }, [isNotification, isSmsAlert, selectedLanguage, shouldUpdate]);
 
   const getLanguage = async () => {
     let mLanguage = await Storage.getData(LANGUAGE);
@@ -73,9 +76,9 @@ const MyPreferences = () => {
         if (data) {
           console.log(data);
           let settings = data.settings;
+          setSelectedLanguage(settings.language_id === 1 ? 'English' : 'عربى');
           setIsNotification(settings.push_alert === 1);
           setIsSmsAlert(settings.sms_alert === 1);
-          setSelectedLanguage(settings.language_id == 1 ? 'English' : 'عربى');
         }
       },
       true,
@@ -140,6 +143,7 @@ const MyPreferences = () => {
     hideMenuLanguage();
     if (preSelectedLanguage?.lang_short_name !== language.lang_short_name) {
       setSelectedLanguage(language.lang_name);
+      setShouldUpdate(true);
       changeAppLanguage(language.lang_short_name);
       await Storage.storeData(LANGUAGE, JSON.stringify(language));
       await Storage.storeData(INITIAL_SCREEN, 'Dashboard');
@@ -223,6 +227,7 @@ const MyPreferences = () => {
         isSelected={isNotification}
         onSwitchStatusChange={() => {
           setIsNotification(!isNotification);
+          setShouldUpdate(true);
         }}
       />
     );
@@ -235,6 +240,7 @@ const MyPreferences = () => {
         isSelected={isSmsAlert}
         onSwitchStatusChange={() => {
           setIsSmsAlert(!isSmsAlert);
+          setShouldUpdate(true);
         }}
       />
     );
@@ -298,7 +304,7 @@ const styles = StyleSheet.create({
   headerContainer: {
     ...ContainerStyles.containerRow,
     ...PaddingStyle.pB32,
-    ...PaddingStyle.pT16
+    ...PaddingStyle.pT16,
   },
   headerTitle: {
     ...LayoutGravity.center,

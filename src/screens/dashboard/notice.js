@@ -76,7 +76,7 @@ const Notice = () => {
       },
       false,
       status => {
-        if (isLoadingFirstTime) {
+        if (!isLoadingFirstTime) {
           setIsBottomLoading(status);
         } else {
           setIsLoading(status);
@@ -155,12 +155,6 @@ const Notice = () => {
               />
             )
           }
-          onEndReachedThreshold={0.5}
-          onEndReached={() => {
-            if (page < totalPage) {
-              apiCallGetNotificationList(false);
-            }
-          }}
           renderItem={({item, index}) => (
             <NotificationItem
               image={
@@ -176,7 +170,13 @@ const Notice = () => {
   };
 
   return (
-    <Screen useScroll={true}>
+    <Screen
+      useScroll={true}
+      onScrollEnd={() => {
+        if (page < totalPage) {
+          apiCallGetNotificationList(false);
+        }
+      }}>
       <View style={styles.container}>
         {renderHeader()}
         <View
