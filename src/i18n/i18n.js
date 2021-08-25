@@ -524,7 +524,7 @@ I18n.translations = {
     additionalInformation: 'بيانات إضافية',
     socialInformation: 'روابط التواصل الإجتماعي',
     investorInformation: 'معلومات المستثمر',
-    selectAdType: 'اختيا رنوع الإعلان',
+    selectAdType: 'اختيار نوع الإعلان',
     topAds: 'أشهر الإعلانات',
     trendingAds: 'الإعلانات الرائجة',
     myNotifications: 'تنبيهاتي',
