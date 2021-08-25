@@ -515,7 +515,7 @@ I18n.translations = {
     investorFieldOfExpHintArabic: 'مجال خبرة المستثمر بالعربي',
     investorCharacteristicsHintArabic: 'صفات المستثمر بالعربي',
     adType: 'نوع الإعلان',
-    establishmentYearOpt: 'سنة التأسيس )اختياري(',
+    establishmentYearOpt: 'سنة التأسيس (اختياري)',
     paymentFailed: 'فشلت العملية',
     paymentSuccessFul: 'تمت العملية بنجاح',
     mainInformation: 'معلومات المشروع',
