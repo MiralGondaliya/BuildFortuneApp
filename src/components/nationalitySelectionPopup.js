@@ -3,6 +3,7 @@ import {
   ActivityIndicator,
   FlatList,
   Modal,
+  ScrollView,
   StyleSheet,
   Text,
   TouchableOpacity,
@@ -21,9 +22,7 @@ import {
 } from '../styles/globalStyles';
 import BackButton from './backButton';
 import I18n from '../i18n/i18n';
-import {apiCall, getCountryList} from '../api';
-import {showErrorMessage} from '../const/flashMessage';
-import { getCategoriesFromStorage, getCountries, getCountriesInApp } from "../const/utils";
+import {getCountries, getCountriesInApp} from '../const/utils';
 
 const NationalitySelectionPopup = ({
   showModal,
@@ -92,40 +91,45 @@ const NationalitySelectionPopup = ({
       <View style={styles.container}>
         {renderHeader()}
         <View style={GlobalStyles.footerContainerLightSmallRadius}>
-          <FlatList
-            keyExtractor={({item, index}) => index}
-            data={countries}
-            ListEmptyComponent={() => (
-              <ActivityIndicator
-                color={COLORS.primary}
-                style={styles.indicator}
-              />
-            )}
-            ListHeaderComponent={() => <View style={MarginStyle.mT24} />}
-            ListFooterComponent={() => <View style={MarginStyle.mB24} />}
-            ItemSeparatorComponent={() => <View style={styles.divider} />}
-            renderItem={({item, index}) => {
-              return (
-                <TouchableOpacity
-                  onPress={() => {
-                    onSelect(item), hideModal();
-                  }}
-                  style={styles.containerItem}>
-                  {!isNationality && !limited ? (
-                    <Text style={styles.txtCountryCode}>
-                      {item.country_phonecode}
-                    </Text>
-                  ) : null}
+          <ScrollView showsVerticalScrollIndicator={false}>
+            <View style={ContainerStyles.container}>
+              <FlatList
+                showsVerticalScrollIndicator={false}
+                keyExtractor={({item, index}) => index}
+                data={countries}
+                ListEmptyComponent={() => (
+                  <ActivityIndicator
+                    color={COLORS.primary}
+                    style={styles.indicator}
+                  />
+                )}
+                ListHeaderComponent={() => <View style={MarginStyle.mT24} />}
+                ListFooterComponent={() => <View style={MarginStyle.mB24} />}
+                ItemSeparatorComponent={() => <View style={styles.divider} />}
+                renderItem={({item, index}) => {
+                  return (
+                    <TouchableOpacity
+                      onPress={() => {
+                        onSelect(item), hideModal();
+                      }}
+                      style={styles.containerItem}>
+                      {!isNationality && !limited ? (
+                        <Text style={styles.txtCountryCode}>
+                          {item.country_phonecode}
+                        </Text>
+                      ) : null}
 
-                  <Text style={styles.txtCountryName}>
-                    {isNationality
-                      ? item.country_nationality
-                      : item.country_name}
-                  </Text>
-                </TouchableOpacity>
-              );
-            }}
-          />
+                      <Text style={styles.txtCountryName}>
+                        {isNationality
+                          ? item.country_nationality
+                          : item.country_name}
+                      </Text>
+                    </TouchableOpacity>
+                  );
+                }}
+              />
+            </View>
+          </ScrollView>
         </View>
       </View>
     </Modal>

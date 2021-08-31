@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {FloatingLabelInput} from 'react-native-floating-label-input/index';
 import {COLORS} from '../styles/colors';
 import {FONTS} from '../styles/fonts';
@@ -9,7 +9,7 @@ import {
   LayoutGravity,
   PaddingStyle,
 } from '../styles/globalStyles';
-import {I18nManager, Image, Platform, View} from 'react-native';
+import {Image, Platform, View} from 'react-native';
 import {IMAGES} from '../assets/images';
 
 const FloatingTextInput = ({
@@ -87,7 +87,6 @@ const FloatingTextInput = ({
         paddingBottom: 4,
         ...FontSize.fontMedium14,
         paddingLeft: Platform.OS === 'ios' ? 6 : 5,
-        textAlign: I18nManager.isRTL ? 'right' : 'left',
       }}
     />
   );

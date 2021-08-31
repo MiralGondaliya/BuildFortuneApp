@@ -88,10 +88,10 @@ const EditAdd = ({route}) => {
   //Contact information
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [countryCodePhoneNumber, setCountryCodePhoneNumber] = useState('1');
+  const [countryCodePhoneNumber, setCountryCodePhoneNumber] = useState('+1');
   const [whatsAppNumber, setWhatsAppNumber] = useState('');
   const [countryCodeWhatsAppNumber, setCountryCodeWhatsAppNumber] =
-    useState('1');
+    useState('+1');
   const [isCheckedContactInfo, setCheckContactInfo] = useState(false);
 
   //Local information
@@ -1144,8 +1144,13 @@ const EditAdd = ({route}) => {
                   ...MarginStyle.mx8,
                   color: COLORS.black,
                   flex: 1,
-                  textAlign: I18nManager.isRTL ? 'right' : 'left',
+                  // textAlign: I18nManager.isRTL ? 'right' : 'left',
                 }}
+                autoCapitalize={
+                  item.secret || item.keyboardType === 'email-address'
+                    ? 'none'
+                    : 'words'
+                }
                 multiline={item.multiLine ?? false}
                 placeholderTextColor={COLORS.gray_hint_light}
                 secureTextEntry={item.secret}

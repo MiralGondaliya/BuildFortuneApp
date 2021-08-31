@@ -35,6 +35,8 @@ const MyAds = () => {
   const [isBottomLoading, setIsBottomLoading] = useState(false);
   const [showEmptyView, setShowEmptyView] = useState(false);
 
+  useEffect(() => {},[page,totalPage])
+
   useEffect(() => {
     apiCallGetPostList(true);
   }, []);
@@ -105,7 +107,7 @@ const MyAds = () => {
             ListHeaderComponent={() => <View style={MarginStyle.mT24} />}
             onEndReachedThreshold={0.5}
             onEndReached={() => {
-              if (page < totalPage) {
+              if (page <= totalPage) {
                 apiCallGetPostList(false);
               }
             }}

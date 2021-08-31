@@ -31,7 +31,7 @@ import PushNotification from 'react-native-push-notification';
 import PushNotificationIOS from '@react-native-community/push-notification-ios';
 import Storage, {FCM_TOKEN} from '../const/storage';
 import {apiCall, updateDeviceToken} from '../api';
-import PaymentWebview from "../screens/paymentWebView";
+import PaymentWebview from '../screens/paymentWebView';
 
 const Stack = createStackNavigator();
 

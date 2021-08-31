@@ -53,7 +53,7 @@ const PrivacySetting = () => {
           showSuccessMessage(message);
           setTimeout(() => {
             NavigationService.goBack();
-          }, [2000]);
+          }, 2000);
         } else {
           showErrorMessage(message);
         }

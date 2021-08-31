@@ -110,6 +110,7 @@ const SearchAds = ({route}) => {
             placeholder={I18n.t('searchYourNeeds')}
             placeholderTextColor={COLORS.gray_hint}
             value={search}
+            autoFocus={true}
             onChangeText={value => {
               apiCallGetPostList(true, value, 1);
             }}
@@ -138,7 +139,7 @@ const SearchAds = ({route}) => {
             contentContainerStyle={{flexGrow: 1}}
             onEndReachedThreshold={0.5}
             onEndReached={() => {
-              if (page < totalPage) {
+              if (page <= totalPage) {
                 apiCallGetPostList(false, search, page);
               }
             }}
@@ -228,6 +229,7 @@ const styles = StyleSheet.create({
     ...PaddingStyle.pR24,
     ...PaddingStyle.py24,
     ...ContainerStyles.containerRow,
+    ...LayoutGravity.centerY,
   },
   searchContainer: {
     backgroundColor: COLORS.white,
@@ -235,6 +237,7 @@ const styles = StyleSheet.create({
     ...ContainerStyles.containerRow,
     ...PaddingStyle.px16,
     alignItems: 'center',
+    height: 48,
     flex: 1,
   },
   searchIcon: {

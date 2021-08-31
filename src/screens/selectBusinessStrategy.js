@@ -50,7 +50,7 @@ const SelectBusinessStrategy = () => {
     },
     {
       name: I18n.t('sellMyBusiness'),
-      icon: IMAGES.handshake,
+      icon: IMAGES.hasnshake_sell_business,
     },
     {
       name: I18n.t('sellMyBusinessIdea'),

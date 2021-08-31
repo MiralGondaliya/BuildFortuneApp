@@ -39,7 +39,7 @@ import {
   isEmailValid,
 } from '../../const/utils';
 
-const CreateAdd = () => {
+const CreateAdd = ({navigation}) => {
   //const {t} = useTranslation();
   const refMenuType = useRef(null);
   const refLicensed = useRef(null);
@@ -84,10 +84,10 @@ const CreateAdd = () => {
   //Contact information
   const [email, setEmail] = useState('');
   const [phoneNumber, setPhoneNumber] = useState('');
-  const [countryCodePhoneNumber, setCountryCodePhoneNumber] = useState('1');
+  const [countryCodePhoneNumber, setCountryCodePhoneNumber] = useState('+1');
   const [whatsAppNumber, setWhatsAppNumber] = useState('');
   const [countryCodeWhatsAppNumber, setCountryCodeWhatsAppNumber] =
-    useState('1');
+    useState('+1');
   const [isCheckedContactInfo, setCheckContactInfo] = useState(false);
 
   //Local information
@@ -1081,8 +1081,13 @@ const CreateAdd = () => {
                   ...MarginStyle.mx8,
                   flex: 1,
                   color: COLORS.black,
-                  textAlign: I18nManager.isRTL ? 'right' : 'left',
+                  // textAlign: I18nManager.isRTL ? 'right' : 'left',
                 }}
+                autoCapitalize={
+                  item.secret || item.keyboardType === 'email-address'
+                    ? 'none'
+                    : 'words'
+                }
                 multiline={item.multiLine ?? false}
                 placeholderTextColor={COLORS.gray_hint_light}
                 secureTextEntry={item.secret}
@@ -1241,6 +1246,7 @@ const CreateAdd = () => {
         if (data) {
           clearState();
           showSuccessMessage(message);
+          navigation.navigate('Home');
         } else {
           console.log(message);
           showErrorMessage(message);

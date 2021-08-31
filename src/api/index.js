@@ -79,16 +79,20 @@ export const apiCall = async (method, onResponse, manageLoader, onLoading) => {
 };
 
 export const login = async (user_email, user_password) => {
+  let languageId = await language();
+
   return Axios.post(BASE_URL + 'app-user-login', {
     user_email: user_email,
     user_password: user_password,
     language: 1,
     fcm_token: '1234567',
+    language_id: languageId,
+    post_language_id: languageId,
     device_type: Platform.OS === 'android' ? 1 : 0,
   });
 };
 
-export const signup = (
+export const signup = async (
   user_phonecode,
   user_phone_no,
   user_name,
@@ -100,6 +104,7 @@ export const signup = (
   user_dob,
   termscheck,
 ) => {
+  let languageId = await language();
   console.log('user_phonecode', user_phonecode);
   console.log('user_phone_no', user_phone_no);
   console.log('user_name', user_name);
@@ -122,6 +127,8 @@ export const signup = (
     user_gender: user_gender,
     user_dob: user_dob,
     termscheck: termscheck,
+    language_id: languageId,
+    post_language_id: languageId,
   });
 };
 
@@ -151,26 +158,36 @@ export const getCategoryList = async type => {
   return Axios.post(BASE_URL + 'app-category-list', formData);
 };
 
-export const forgotPassword = email => {
-  return Axios.post(BASE_URL + 'app-user-forget-password', {user_email: email});
+export const forgotPassword = async email => {
+  let languageId = await language();
+  let formData = new FormData();
+  formData.append('language_id', languageId);
+  formData.append('post_language_id', languageId);
+  formData.append('user_email', email);
+  return Axios.post(BASE_URL + 'app-user-forget-password', formData);
 };
 
 export const getProfile = async () => {
   let data = await auth();
   let token = data.token;
-
+  let languageId = await language();
   let formData = new FormData();
   formData.append('user_token', token);
+  formData.append('language_id', languageId);
+  formData.append('post_language_id', languageId);
   let request = Axios.post(BASE_URL + 'app-user-profile', formData);
   return request;
 };
 
 export const logout = async () => {
   let data = await auth();
+  let languageId = await language();
   let token = data.token;
-  return Axios.post(BASE_URL + 'app-user-logout', {
-    user_token: token,
-  });
+
+  let formData = new FormData();
+  formData.append('user_token', token);
+  formData.append('post_language_id', languageId);
+  return Axios.post(BASE_URL + 'app-user-logout', formData);
 };
 
 export const updateProfile = async (
@@ -188,6 +205,7 @@ export const updateProfile = async (
   console.log('user_gender', user_gender);
   console.log('user_dob', user_dob);
 
+  let languageId = await language();
   let data = await auth();
   let token = data.token;
 
@@ -199,6 +217,8 @@ export const updateProfile = async (
     user_country_id: user_country_id,
     user_gender: user_gender,
     user_dob: user_dob,
+    post_language_id: languageId,
+    language_id: languageId,
   });
 };
 
@@ -209,12 +229,15 @@ export const changePassword = async (
 ) => {
   let data = await auth();
   let token = data.token;
+  let languageId = await language();
 
   let formData = new FormData();
   formData.append('user_token', token);
   formData.append('old_password', old_password);
   formData.append('user_password', user_password);
   formData.append('confirm_password', confirm_password);
+  formData.append('language_id', languageId);
+  formData.append('post_language_id', languageId);
 
   return Axios.post(BASE_URL + 'app-change-password', formData);
 };
@@ -222,6 +245,7 @@ export const changePassword = async (
 export const saveUserSetting = async (push_alert, sms_alert, language_id) => {
   let data = await auth();
   let token = data.token;
+
 
   let formData = new FormData();
   formData.append('user_token', token);
@@ -235,6 +259,7 @@ export const saveUserSetting = async (push_alert, sms_alert, language_id) => {
 export const updateProfileImage = async image => {
   let data = await auth();
   let token = data.token;
+  let languageId = await language();
 
   let formData = new FormData();
   formData.append('user_token', token);
@@ -247,6 +272,8 @@ export const updateProfileImage = async image => {
     name,
   };
   formData.append('user_profile_image', imageObj);
+  formData.append('language_id', languageId);
+  formData.append('post_language_id', languageId);
 
   return Axios.post(BASE_URL + 'app-user-profile-image', formData);
 };

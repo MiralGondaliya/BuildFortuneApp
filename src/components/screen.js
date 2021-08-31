@@ -10,14 +10,6 @@ import PropTypes from 'prop-types';
 import {COLORS} from '../styles/colors';
 
 const Screen = props => {
-  const isCloseToBottom = ({layoutMeasurement, contentOffset, contentSize}) => {
-    const paddingToBottom = 20;
-    return (
-      layoutMeasurement.height + contentOffset.y >=
-      contentSize.height - paddingToBottom
-    );
-  };
-
   return (
     <View
       style={{
@@ -33,12 +25,6 @@ const Screen = props => {
         style={{...ContainerStyles.container, backgroundColor: COLORS.white}}>
         {props.useScroll ? (
           <ScrollView
-            onScroll={({nativeEvent}) => {
-              if (isCloseToBottom(nativeEvent)) {
-                props?.onScrollEnd && props.onScrollEnd();
-              }
-            }}
-            scrollEventThrottle={-100}
             decelerationRate="normal"
             overScrollMode={'never'}
             keyboardShouldPersistTaps={true}

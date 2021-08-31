@@ -24,6 +24,7 @@ const AdsInformation = ({title, subTitle, information}) => {
       item.type === 'email' ||
       item.type === 'phone_no' ||
       item.type === 'whatsapp';
+
     return (
       <View style={styles.subInfoContainer}>
         <Text style={styles.txtSubInfoKey}>{item.key}</Text>
@@ -47,6 +48,7 @@ const AdsInformation = ({title, subTitle, information}) => {
           style={[
             styles.txtSubInfoValue,
             highlight && {color: COLORS.primary},
+            {textAlign: highlight ? 'right' : 'left'},
           ]}>
           {item.value}
         </Text>
@@ -105,7 +107,6 @@ const styles = StyleSheet.create({
   },
   txtSubInfoValue: {
     flex: 0.7,
-    textAlign: 'left',
     ...FontSize.fontLight14,
     ...PaddingStyle.px16,
     ...PaddingStyle.py16,

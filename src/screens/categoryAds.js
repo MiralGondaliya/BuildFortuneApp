@@ -123,7 +123,7 @@ const CategoryAds = ({route}) => {
             contentContainerStyle={{flexGrow: 1}}
             onEndReachedThreshold={0.5}
             onEndReached={() => {
-              if (page < totalPage) {
+              if (page <= totalPage) {
                 apiCallGetPostList(false);
               }
             }}
@@ -152,6 +152,7 @@ const CategoryAds = ({route}) => {
             renderItem={({item, index}) => (
               <View>
                 <TopAdsCell
+                  key={index+''}
                   location={item.post_country_name}
                   flag={item.post_country_flag_icon}
                   title={item.post_title}
