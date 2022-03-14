@@ -5,7 +5,7 @@ import {apiCall, logout} from '../api';
 import NavigationService from '../navigation/NavigationService';
 import {showErrorMessage} from './flashMessage';
 import I18n from 'react-native-i18n';
-import {I18nManager} from 'react-native';
+import {I18nManager, Platform} from 'react-native';
 
 export function getNavigationParams(routeParams, paramName, defaultValue = '') {
   if (isPresent(routeParams)) {
@@ -153,4 +153,8 @@ export const getCountries = async () => {
 export const getCountriesInApp = async () => {
   let generalData = await getGeneralData();
   return generalData?.countries_inapp;
+};
+
+export const isIos = () => {
+  return Platform.OS === 'ios';
 };

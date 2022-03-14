@@ -236,7 +236,7 @@ I18n.translations = {
     pleaseSelectFeasibilityStudy: 'Please select feasibility study',
     viewContactDetails: 'View contact details',
     noAdsCountry: 'No businesses available in this country',
-    translatingApplication: 'Translating Build Fortune..',
+    translatingApplication: 'Translating Build Deals..',
     Egypt: 'EGP',
     India: '₹',
     Kuwait: 'KWD',

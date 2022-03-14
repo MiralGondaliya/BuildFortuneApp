@@ -72,10 +72,12 @@ const styles = StyleSheet.create({
   icon: {
     width: 56,
     height: 56,
+    tintColor: COLORS.primary,
   },
   iconBig: {
     width: 75,
     height: 75,
+    tintColor: COLORS.primary,
   },
 });
 export default CategoriesCell;

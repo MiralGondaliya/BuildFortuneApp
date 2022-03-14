@@ -3,6 +3,7 @@ import {Image, View} from 'react-native';
 import BackButton from './backButton';
 import {IMAGES} from '../assets/images';
 import {Gravity, LayoutGravity} from '../styles/globalStyles';
+import { COLORS } from "../styles/colors";
 
 const GetStartedHeader = ({hideBackButton}) => {
   return (

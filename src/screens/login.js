@@ -22,6 +22,7 @@ import {apiCall, login, updateUserSettings} from '../api';
 import {showErrorMessage} from '../const/flashMessage';
 import {showLoader} from '../components/Loader';
 import Storage, {LANGUAGE, USER_DATA} from '../const/storage';
+import {isIos} from '../const/utils';
 
 const Login = () => {
   //const {t} = useTranslation();
@@ -118,7 +119,7 @@ const Login = () => {
               ...MarginStyle.mx48,
               ...FontSize.fontRegular14,
               ...FontColor.colorCornFlowerFlue,
-              marginTop: -16,
+              marginTop: isIos() ? -1 : -16,
             }}>
             {I18n.t('signInToContinue')}
           </Text>

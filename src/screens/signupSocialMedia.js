@@ -17,6 +17,7 @@ import Button from '../components/button';
 import SocialLogin from '../components/socialLogin';
 import AuthAccountFooter from '../components/authAccountFooter';
 import NavigationService from '../navigation/NavigationService';
+import { isIos } from "../const/utils";
 
 const SignupSocialMedia = () => {
   const [phone, setPhone] = useState('');
@@ -107,7 +108,7 @@ const SignupSocialMedia = () => {
               ...MarginStyle.mx48,
               ...FontSize.fontRegular14,
               ...FontColor.colorCornFlowerFlue,
-              marginTop: -16,
+              marginTop: isIos() ? -1 : -16,
             }}>
             Create a new account
           </Text>

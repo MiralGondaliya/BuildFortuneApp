@@ -34,7 +34,7 @@ import Skip from '../components/skip';
 import NationalitySelectionPopup from '../components/nationalitySelectionPopup';
 import {apiCall, signup} from '../api';
 import {showErrorMessage, showSuccessMessage} from '../const/flashMessage';
-import {isEmailValid} from '../const/utils';
+import { isEmailValid, isIos } from "../const/utils";
 
 const Signup = () => {
   //const {t} = useTranslation();
@@ -308,7 +308,7 @@ const Signup = () => {
               ...MarginStyle.mx48,
               ...FontSize.fontRegular14,
               ...FontColor.colorCornFlowerFlue,
-              marginTop: -16,
+              marginTop: isIos() ? -1 : -16,
             }}>
             {I18n.t('createAnewAccount')}
           </Text>
@@ -316,6 +316,7 @@ const Signup = () => {
         <View style={GlobalStyles.footerContainerLight}>
           {inputs.map((item, index) => (
             <TouchableOpacity
+              disabled={true}
               onPress={() => {
                 if (item.placeholder === I18n.t('dateOfBirth')) {
                   setDatePickerVisibility(!isDatePickerVisible);

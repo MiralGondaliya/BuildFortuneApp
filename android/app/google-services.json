@@ -1,7 +1,7 @@
 {
   "project_info": {
     "project_number": "18986708892",
-    "project_id": "build-fortune",
+    "project_id": "locanal",
     "storage_bucket": "build-fortune.appspot.com"
   },
   "client": [
@@ -9,7 +9,7 @@
       "client_info": {
         "mobilesdk_app_id": "1:18986708892:android:688b603e6b9d9fac0d2259",
         "android_client_info": {
-          "package_name": "com.buildfortune"
+          "package_name": "com.locanal"
         }
       },
       "oauth_client": [

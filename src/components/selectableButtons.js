@@ -86,7 +86,7 @@ const styles = StyleSheet.create({
   buttonContainer: {
     height: 48,
     borderRadius: 8,
-    borderWidth: 1,
+    borderWidth: 0,
     ...ContainerStyles.containerRow,
   },
   icon: {

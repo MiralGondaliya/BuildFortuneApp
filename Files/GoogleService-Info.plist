@@ -3,9 +3,9 @@
 <plist version="1.0">
 <dict>
 	<key>CLIENT_ID</key>
-	<string>18986708892-oe04ioout5qfe1h0psdeee43o5c53gto.apps.googleusercontent.com</string>
+	<string>18986708892-pu0ecaev6geu1bvc0pg5mfp4ju1mf4t4.apps.googleusercontent.com</string>
 	<key>REVERSED_CLIENT_ID</key>
-	<string>com.googleusercontent.apps.18986708892-oe04ioout5qfe1h0psdeee43o5c53gto</string>
+	<string>com.googleusercontent.apps.18986708892-pu0ecaev6geu1bvc0pg5mfp4ju1mf4t4</string>
 	<key>API_KEY</key>
 	<string>AIzaSyAJea-syjjTXb-HssKG60hkJTIUYfO1I0Q</string>
 	<key>GCM_SENDER_ID</key>
@@ -13,7 +13,7 @@
 	<key>PLIST_VERSION</key>
 	<string>1</string>
 	<key>BUNDLE_ID</key>
-	<string>com.buildfortune</string>
+	<string>com.locanal</string>
 	<key>PROJECT_ID</key>
 	<string>build-fortune</string>
 	<key>STORAGE_BUCKET</key>
@@ -29,6 +29,6 @@
 	<key>IS_SIGNIN_ENABLED</key>
 	<true></true>
 	<key>GOOGLE_APP_ID</key>
-	<string>1:18986708892:ios:1b570edc00469b9b0d2259</string>
+	<string>1:18986708892:ios:d3afea4a9a8a0f9d0d2259</string>
 </dict>
 </plist>

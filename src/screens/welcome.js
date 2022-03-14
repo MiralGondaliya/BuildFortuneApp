@@ -16,6 +16,7 @@ import Button from '../components/button';
 import NavigationService from '../navigation/NavigationService';
 import I18n from '../i18n/i18n';
 import Storage, {IS_APP_INSTALLED} from '../const/storage';
+import { COLORS } from "../styles/colors";
 
 const Welcome = () => {
   //const {t} = useTranslation();

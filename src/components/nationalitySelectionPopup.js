@@ -22,7 +22,7 @@ import {
 } from '../styles/globalStyles';
 import BackButton from './backButton';
 import I18n from '../i18n/i18n';
-import {getCountries, getCountriesInApp} from '../const/utils';
+import {getCountries, getCountriesInApp, isIos} from '../const/utils';
 
 const NationalitySelectionPopup = ({
   showModal,
@@ -153,6 +153,7 @@ const styles = StyleSheet.create({
   },
   headerContainer: {
     ...ContainerStyles.containerRow,
+    paddingTop: isIos() ? 56 : 0,
   },
   headerTitle: {
     ...LayoutGravity.center,

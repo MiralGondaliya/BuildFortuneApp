@@ -51,7 +51,6 @@ const ForgotPassword = () => {
           <BackButton light={true} />
           <Text
             style={{
-              textAlign: 'justify',
               lineHeight: 52,
               ...MarginStyle.mL48,
               ...FontSize.fontBold48,
@@ -62,7 +61,9 @@ const ForgotPassword = () => {
         </View>
 
         <View style={GlobalStyles.footerContainerLight}>
-          <Text style={styles.txtForgotPassword}>{I18n.t('forgotPasswordMsg')}</Text>
+          <Text style={styles.txtForgotPassword}>
+            {I18n.t('forgotPasswordMsg')}
+          </Text>
           <FloatingTextInput
             onChange={value => {
               setEmail(value);

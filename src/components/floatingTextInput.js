@@ -82,11 +82,13 @@ const FloatingTextInput = ({
         marginTop: 10,
         ...ContainerStyles.container,
         ...PaddingStyle.px8,
+        minHeight: 48,
       }}
       inputStyles={{
         paddingBottom: 4,
         ...FontSize.fontMedium14,
         paddingLeft: Platform.OS === 'ios' ? 6 : 5,
+        minHeight: 48,
       }}
     />
   );

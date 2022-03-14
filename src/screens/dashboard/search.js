@@ -188,6 +188,7 @@ const styles = StyleSheet.create({
     ...FontColor.colorBlack,
     lineHeight: 20,
     flex: 1,
+    minHeight: 48,
   },
   closeIcon: {
     width: 12,
